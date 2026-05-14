@@ -13,7 +13,6 @@ namespace Web.Areas.Admin.Controllers
         : Controller
     {
         public IActionResult Index() => View();
-
         public async Task<IActionResult> ProductsExcel()
         {
             var products = await productService.GetAllAsync();
