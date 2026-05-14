@@ -1,0 +1,30 @@
+﻿using Application.DTOs.Common;
+
+namespace Application.DTOs.Sections
+{
+    public class SectionDto : BaseDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public string? Icon { get; set; }
+        public int DisplayOrder { get; set; }
+    }
+
+    public class CreateSectionDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public string? Icon { get; set; }
+        public int DisplayOrder { get; set; }
+    }
+
+    public class UpdateSectionDto
+    {
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public string? Icon { get; set; }
+        public int DisplayOrder { get; set; }
+        public bool IsActive { get; set; }
+    }
+}

@@ -1,0 +1,32 @@
+﻿@model IReadOnlyList<Application.DTOs.Products.ProductDto>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fe">
+<head>
+    <meta charset="utf-8" />
+    <title>گزارش محصولات</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; direction: rtl; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<h2>گزارش محصولات</h2>
+<p>تاریخ: @DateTime.Now.ToString("yyyy/MM/dd HH:mm")</p>
+<table>
+    <thead>
+    <tr><th>شناسه</th><th>نام</th><th>قیمت</th><th>موجودی</th><th>دسته‌بندی</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr><td>@item.Id</td><td>@item.Name</td><td>@item.Price.ToString("N0")</td><td>@item.StockQuantity</td><td>@item.CategoryName</td></tr>
+    }
+    </tbody>
+</table>
+</body>
+</html>
