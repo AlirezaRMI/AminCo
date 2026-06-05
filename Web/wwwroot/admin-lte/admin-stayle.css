@@ -1,0 +1,223 @@
+﻿
+:root {
+    --bg-dark: #0a0c0f;
+    --surface-dark: #14171c;
+    --border-dark: #2a2e35;
+    --gold: #f5c542;
+    --gold-dark: #d4a017;
+    --text-muted: #9ca3af;
+}
+
+* {
+    transition: all 0.2s ease;
+}
+
+body {
+    background: var(--bg-dark);
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    overflow-x: hidden;
+}
+
+/* سایدبار */
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    background: linear-gradient(180deg, #0f1117 0%, #0a0c10 100%);
+    border-left: 1px solid var(--border-dark);
+    z-index: 1030;
+    overflow-y: auto;
+    transition: all 0.3s;
+}
+
+/* استایل اسکرول سایدبار */
+.admin-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+.admin-sidebar::-webkit-scrollbar-track {
+    background: var(--surface-dark);
+}
+.admin-sidebar::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+/* لوگو */
+.sidebar-logo {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-dark);
+    margin-bottom: 1rem;
+}
+.sidebar-logo img {
+    max-height: 50px;
+}
+.sidebar-logo h4 {
+    color: var(--gold);
+    font-weight: 700;
+    margin-top: 0.75rem;
+    font-size: 1.2rem;
+}
+
+/* منوی سایدبار */
+.nav-link-custom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    margin: 4px 12px;
+    border-radius: 12px;
+    color: #e5e7eb;
+    font-weight: 500;
+    transition: 0.2s;
+}
+.nav-link-custom i {
+    width: 24px;
+    font-size: 1.2rem;
+    color: #9ca3af;
+}
+.nav-link-custom:hover {
+    background: rgba(245, 197, 66, 0.15);
+    color: var(--gold);
+}
+.nav-link-custom:hover i {
+    color: var(--gold);
+}
+.nav-link-custom.active {
+    background: linear-gradient(95deg, rgba(245,197,66,0.2) 0%, rgba(245,197,66,0.05) 100%);
+    color: var(--gold);
+    border-right: 3px solid var(--gold);
+}
+.nav-link-custom.active i {
+    color: var(--gold);
+}
+
+/* دسته‌بندی منو */
+.nav-divider {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6b7280;
+    padding: 12px 24px 4px;
+    margin-top: 8px;
+}
+
+/* محتوای اصلی */
+.admin-main {
+    margin-right: 280px;
+    min-height: 100vh;
+    background: var(--bg-dark);
+}
+
+/* هدر بالایی */
+.admin-topbar {
+    background: rgba(10, 12, 15, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-dark);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+.page-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-info span {
+    color: #d1d5db;
+}
+.logout-btn {
+    background: rgba(245,197,66,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 48px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+.logout-btn:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+/* محتوای صفحات */
+.content-wrapper {
+    padding: 1.8rem;
+}
+
+/* دکمه طلایی */
+.btn-gold {
+    background: var(--gold);
+    color: #000;
+    border-radius: 48px;
+    border: none;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+.btn-gold:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+}
+
+.card-dashboard {
+    background: var(--surface-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 24px;
+    transition: 0.2s;
+}
+.card-dashboard:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+}
+
+.modal-content {
+    background: var(--surface-dark);
+    border: 1px solid var(--border-dark);
+}
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        right: -280px;
+    }
+    .admin-sidebar.show {
+        right: 0;
+    }
+    .admin-main {
+        margin-right: 0;
+    }
+    .toggle-sidebar {
+        display: block;
+    }
+}
+.toggle-sidebar {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-left: 15px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1025;
+}
+.overlay.show {
+    display: block;
+}
