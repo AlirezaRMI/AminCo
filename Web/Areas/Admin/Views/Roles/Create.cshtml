@@ -1,0 +1,17 @@
+﻿@model Application.DTOs.Roles.CreateRoleDto
+@{
+    ViewData["Title"] = "ایجاد نقش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ایجاد نقش جدید</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label>نام نقش</label>
+            <input asp-for="Name" class="form-control bg-dark text-white" required />
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

@@ -1,0 +1,34 @@
+﻿@model Application.DTOs.PortfolioImages.UpdatePortfolioImageDto
+@{
+    ViewData["Title"] = "ویرایش تصویر";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش تصویر</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>آدرس تصویر</label>
+            <input asp-for="ImageUrl" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>عنوان</label>
+            <input asp-for="Title" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>متن Alt</label>
+            <input asp-for="AltText" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>ترتیب نمایش</label>
+            <input asp-for="DisplayOrder" class="form-control bg-dark text-white" type="number" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsMain" class="form-check-input" />
+            <label class="form-check-label">تصویر اصلی</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" asp-route-portfolioId="@Model.Id" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

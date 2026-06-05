@@ -1,0 +1,14 @@
+﻿@model Application.DTOs.PortfolioImages.PortfolioImageDto
+@{
+    ViewData["Title"] = "جزئیات تصویر";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <img src="@Model.ImageUrl" style="max-width:100%;" />
+    <p><strong>عنوان:</strong> @Model.Title</p>
+    <p><strong>Alt:</strong> @Model.AltText</p>
+    <p><strong>ترتیب:</strong> @Model.DisplayOrder</p>
+    <p><strong>اصلی:</strong> @(Model.IsMain ? "بله" : "خیر")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" asp-route-portfolioId="@Model.PortfolioId" class="btn btn-secondary">بازگشت</a>
+</div>

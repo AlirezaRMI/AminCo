@@ -1,0 +1,50 @@
+﻿@model Application.DTOs.Portfolios.UpdatePortfolioDto
+@{
+    ViewData["Title"] = "ویرایش پروژه";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش پروژه</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>عنوان</label>
+            <input asp-for="Title" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>Slug</label>
+            <input asp-for="Slug" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea asp-for="Description" class="form-control bg-dark text-white" rows="5"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>نام مشتری</label>
+            <input asp-for="ClientName" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>تاریخ پروژه</label>
+            <input asp-for="ProjectDate" class="form-control bg-dark text-white" type="date" />
+        </div>
+        <div class="mb-3">
+            <label>آدرس پروژه</label>
+            <input asp-for="ProjectUrl" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>دسته‌بندی</label>
+            <select asp-for="Category" class="form-select bg-dark text-white" asp-items="Html.GetEnumSelectList<Domain.Enums.PortfolioCategory>()"></select>
+        </div>
+        <div class="mb-3">
+            <label>ترتیب نمایش</label>
+            <input asp-for="DisplayOrder" class="form-control bg-dark text-white" type="number" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">فعال</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

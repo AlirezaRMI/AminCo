@@ -1,0 +1,42 @@
+﻿@model Application.DTOs.DiscountCodes.UpdateDiscountCodeDto
+@{
+    ViewData["Title"] = "ویرایش کد تخفیف";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش کد تخفیف</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>کد</label>
+            <input asp-for="Code" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>نوع تخفیف</label>
+            <select asp-for="Type" class="form-select bg-dark text-white" asp-items="Html.GetEnumSelectList<Domain.Enums.DiscountType>()"></select>
+        </div>
+        <div class="mb-3">
+            <label>مقدار</label>
+            <input asp-for="Value" class="form-control bg-dark text-white" type="number" step="0.01" required />
+        </div>
+        <div class="mb-3">
+            <label>تاریخ شروع</label>
+            <input asp-for="StartDate" class="form-control bg-dark text-white" type="date" />
+        </div>
+        <div class="mb-3">
+            <label>تاریخ پایان</label>
+            <input asp-for="EndDate" class="form-control bg-dark text-white" type="date" />
+        </div>
+        <div class="mb-3">
+            <label>حداکثر تعداد استفاده</label>
+            <input asp-for="UsageLimit" class="form-control bg-dark text-white" type="number" min="1" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">فعال</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

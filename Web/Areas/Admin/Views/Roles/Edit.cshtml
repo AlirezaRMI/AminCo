@@ -1,0 +1,22 @@
+﻿@model Application.DTOs.Roles.UpdateRoleDto
+@{
+    ViewData["Title"] = "ویرایش نقش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش نقش</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>نام نقش</label>
+            <input asp-for="Name" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">فعال</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

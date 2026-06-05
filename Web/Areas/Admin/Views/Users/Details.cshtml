@@ -1,0 +1,14 @@
+﻿@model Application.DTOs.Users.UserDto
+@{
+    ViewData["Title"] = "جزئیات کاربر";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>@Model.FullName</h2>
+    <p><strong>ایمیل:</strong> @Model.Email</p>
+    <p><strong>تلفن:</strong> @Model.PhoneNumber</p>
+    <p><strong>تاریخ عضویت:</strong> @Model.CreatedAt.ToString("yyyy/MM/dd HH:mm")</p>
+    <p><strong>وضعیت:</strong> @(Model.IsActive ? "فعال" : "غیرفعال")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

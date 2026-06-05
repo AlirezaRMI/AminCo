@@ -1,0 +1,76 @@
+﻿@model Web.Areas.Admin.Controllers.DashboardViewModel
+@{
+    ViewData["Title"] = "داشبورد";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card-dashboard p-3 text-center">
+                <i class="fas fa-users fa-2x text-gold"></i>
+                <h3 class="mt-2">@Model.TotalUsers</h3>
+                <p>کاربران</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card-dashboard p-3 text-center">
+                <i class="fas fa-newspaper fa-2x text-gold"></i>
+                <h3 class="mt-2">@Model.TotalArticles</h3>
+                <p>مقالات</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card-dashboard p-3 text-center">
+                <i class="fas fa-images fa-2x text-gold"></i>
+                <h3 class="mt-2">@Model.TotalPortfolios</h3>
+                <p>نمونه کارها</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card-dashboard p-3 text-center">
+                <i class="fas fa-box fa-2x text-gold"></i>
+                <h3 class="mt-2">@Model.TotalProducts</h3>
+                <p>محصولات</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card-dashboard p-3 text-center">
+                <i class="fas fa-shopping-cart fa-2x text-gold"></i>
+                <h3 class="mt-2">@Model.TotalOrders</h3>
+                <p>سفارشات</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card-dashboard p-3">
+                <h5>آخرین مقالات</h5>
+                <ul class="list-unstyled">
+                    @foreach (var article in Model.RecentArticles)
+                    {
+                        <li class="border-bottom py-2">📄 @article.Title <span class="float-left">@article.PublishDate.ToString("yyyy/MM/dd")</span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-dashboard p-3">
+                <h5>آخرین سفارشات</h5>
+                <ul class="list-unstyled">
+                    @foreach (var order in Model.RecentOrders)
+                    {
+                        <li class="border-bottom py-2">🛒 سفارش #@order.Id - @order.TotalAmount.ToString("N0") تومان <span class="float-left">@order.OrderDate.ToString("yyyy/MM/dd")</span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gold { color: #f5c542; }
+    .card-dashboard { background: #1a1a1a; border-radius: 20px; border: 1px solid #2c2c2c; transition: 0.2s; }
+    .card-dashboard:hover { transform: translateY(-5px); border-color: #f5c542; }
+</style>

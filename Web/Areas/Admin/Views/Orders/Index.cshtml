@@ -1,0 +1,30 @@
+﻿@model IReadOnlyList<Application.DTOs.Orders.OrderDto>
+@{
+    ViewData["Title"] = "سفارشات";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-between mb-3">
+    <h2>سفارشات</h2>
+</div>
+<table class="table table-dark table-bordered">
+    <thead>
+    <tr><th>سفارش #</th><th>کاربر</th><th>تاریخ</th><th>مبلغ کل</th><th>وضعیت</th><th>پرداخت</th><th>عملیات</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><a asp-action="Details" asp-route-id="@item.Id">#@item.Id</a></td>
+            <td>@item.UserId</td> <!-- بهتر است نام کاربر نمایش داده شود -->
+            <td>@item.OrderDate.ToString("yyyy/MM/dd HH:mm")</td>
+            <td>@item.TotalAmount.ToString("N0") تومان</td>
+            <td>@item.Status</td>
+            <td>@(item.IsPaid ? "پرداخت شده" : "پرداخت نشده")</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">جزئیات</a>
+                <a asp-action="UpdateStatus" asp-route-id="@item.Id" class="btn btn-sm btn-warning">تغییر وضعیت</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

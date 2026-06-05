@@ -90,6 +90,13 @@ namespace Application.Logics.Services
             return Convert.ToBase64String(hash);
         }
 
+        public async Task<List<string>> GetRolesAsync(long userId)
+        {
+            var user = await repo.GetSingleAsync(u => u.Id == userId, includeString:"UserRoles");
+            if (user == null) return new List<string>();
+            return user.UserRoles?.Select(ur => ur.Role?.Name).Where(r => r != null).ToList() ?? new List<string>();
+        }
+        
         private bool VerifyPassword(string password, string hash)
         {
             return HashPassword(password) == hash;

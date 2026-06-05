@@ -1,0 +1,33 @@
+﻿@model Application.DTOs.AboutUs.AboutUsDto
+@{
+    ViewData["Title"] = "مدیریت درباره ما";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>درباره ما</h2>
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Id" value="@Model.Id"/>
+        <div class="mb-3">
+            <label>عنوان</label>
+            <input type="text" name="Title" value="@Model.Title" class="form-control bg-dark text-white" required/>
+        </div>
+        <div class="mb-3">
+            <label>محتوا</label>
+            <textarea name="Content" rows="10" class="form-control bg-dark text-white"
+                      required>@Model.Content</textarea>
+        </div>
+        <div class="mb-3">
+            <label>آدرس تصویر</label>
+            <input type="text" name="ImageUrl" value="@Model.ImageUrl" class="form-control bg-dark text-white"/>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+    </form>
+</div>
+<style>.btn-gold {
+        background: #f5c542;
+        color: #000;
+        border-radius: 48px;
+        padding: 8px 20px;
+        border: none;
+    }</style>

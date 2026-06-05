@@ -1,0 +1,38 @@
+﻿@model Application.DTOs.Articles.UpdateArticleDto
+@{
+    ViewData["Title"] = "ویرایش مقاله";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش مقاله</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>عنوان</label>
+            <input asp-for="Title" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>Slug</label>
+            <input asp-for="Slug" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>توضیح کوتاه</label>
+            <textarea asp-for="ShortDescription" class="form-control bg-dark text-white" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>متن کامل</label>
+            <textarea asp-for="Content" class="form-control bg-dark text-white" rows="10"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>آدرس تصویر اصلی</label>
+            <input asp-for="MainImageUrl" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsPublished" class="form-check-input" />
+            <label class="form-check-label">منتشر شود</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

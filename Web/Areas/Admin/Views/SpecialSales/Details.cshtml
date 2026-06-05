@@ -1,0 +1,14 @@
+﻿@model Application.DTOs.SpecialSales.SpecialSaleDto
+@{
+    ViewData["Title"] = "جزئیات فروش ویژه";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>فروش ویژه محصول: @Model.ProductName</h2>
+    <p><strong>قیمت فروش ویژه:</strong> @Model.SalePrice.ToString("N0") تومان</p>
+    <p><strong>تاریخ شروع:</strong> @Model.StartDate.ToString("yyyy/MM/dd")</p>
+    <p><strong>تاریخ پایان:</strong> @Model.EndDate.ToString("yyyy/MM/dd")</p>
+    <p><strong>وضعیت:</strong> @(Model.IsActive ? "فعال" : "غیرفعال")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

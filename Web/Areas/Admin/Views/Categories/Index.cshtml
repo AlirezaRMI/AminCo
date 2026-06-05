@@ -1,0 +1,39 @@
+﻿@model IReadOnlyList<Application.DTOs.Categories.CategoryDto>
+@{
+    ViewData["Title"] = "دسته‌بندی‌ها";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-between mb-3">
+    <h2>دسته‌بندی‌ها</h2>
+    <a asp-action="Create" class="btn btn-gold">+ دسته‌بندی جدید</a>
+</div>
+<table class="table table-dark table-bordered">
+    <thead><tr><th>نام</th><th>توضیحات</th><th>بخش</th><th>عملیات</th></tr></thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>@item.SectionName</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">جزئیات</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">ویرایش</a>
+                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-name="@item.Name">حذف</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var id = button.getAttribute('data-id');
+            var title = button.getAttribute('data-title');
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteTitle').innerText = title;
+        });
+    </script>
+}

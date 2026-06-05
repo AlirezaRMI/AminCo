@@ -1,0 +1,34 @@
+﻿@model Application.DTOs.Categories.UpdateCategoryDto
+@{
+    ViewData["Title"] = "ویرایش دسته‌بندی";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش دسته‌بندی</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>نام دسته‌بندی</label>
+            <input asp-for="Name" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea asp-for="Description" class="form-control bg-dark text-white" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>بخش (Section)</label>
+            <select asp-for="SectionId" class="form-select bg-dark text-white" asp-items="@(ViewData["Sections"] as SelectList)" required></select>
+        </div>
+        <div class="mb-3">
+            <label>آدرس تصویر</label>
+            <input asp-for="ImageUrl" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">فعال</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

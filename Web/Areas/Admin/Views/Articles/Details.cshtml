@@ -1,0 +1,17 @@
+﻿@model Application.DTOs.Articles.ArticleDto
+@{
+    ViewData["Title"] = "جزئیات مقاله";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>@Model.Title</h2>
+    <hr />
+    <p><strong>Slug:</strong> @Model.Slug</p>
+    <p><strong>توضیح کوتاه:</strong> @Model.ShortDescription</p>
+    <p><strong>متن:</strong> @Html.Raw(Model.Content)</p>
+    <p><strong>تصویر اصلی:</strong> @Model.MainImageUrl</p>
+    <p><strong>تاریخ انتشار:</strong> @Model.PublishDate.ToString("yyyy/MM/dd HH:mm")</p>
+    <p><strong>وضعیت:</strong> @(Model.IsPublished ? "منتشر شده" : "پیش‌نویس")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

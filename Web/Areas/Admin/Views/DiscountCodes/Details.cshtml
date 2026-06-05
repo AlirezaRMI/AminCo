@@ -1,0 +1,16 @@
+﻿@model Application.DTOs.DiscountCodes.DiscountCodeDto
+@{
+    ViewData["Title"] = "جزئیات کد تخفیف";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>@Model.Code</h2>
+    <p><strong>نوع:</strong> @Model.Type</p>
+    <p><strong>مقدار:</strong> @Model.Value</p>
+    <p><strong>تاریخ شروع:</strong> @(Model.StartDate?.ToString("yyyy/MM/dd") ?? "نامحدود")</p>
+    <p><strong>تاریخ پایان:</strong> @(Model.EndDate?.ToString("yyyy/MM/dd") ?? "نامحدود")</p>
+    <p><strong>تعداد استفاده:</strong> @Model.UsedCount / @Model.UsageLimit</p>
+    <p><strong>وضعیت:</strong> @(Model.IsActive ? "فعال" : "غیرفعال")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

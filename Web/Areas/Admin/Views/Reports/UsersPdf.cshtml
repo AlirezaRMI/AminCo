@@ -1,0 +1,35 @@
+﻿@model IReadOnlyList<Application.DTOs.Users.UserDto>
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>لیست کاربران</title>
+    <style>
+        body { font-family: 'Vazirmatn', Tahoma, sans-serif; font-size: 12pt; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: right; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<h2>گزارش کاربران</h2>
+<table>
+    <thead>
+    <tr><th>شناسه</th><th>نام کامل</th><th>ایمیل</th><th>تلفن</th><th>تاریخ عضویت</th><th>فعال</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.FullName</td>
+            <td>@item.Email</td>
+            <td>@item.PhoneNumber</td>
+            <td>@item.CreatedAt.ToString("yyyy/MM/dd")</td>
+            <td>@(item.IsActive ? "فعال" : "غیرفعال")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+</body>
+</html>

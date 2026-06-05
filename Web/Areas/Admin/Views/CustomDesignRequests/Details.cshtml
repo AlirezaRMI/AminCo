@@ -1,0 +1,17 @@
+﻿@model Application.DTOs.CustomDesignRequests.CustomDesignRequestDto
+@{
+    ViewData["Title"] = "جزئیات درخواست";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>درخواست از @Model.FullName</h2>
+    <p><strong>ایمیل:</strong> @Model.Email</p>
+    <p><strong>تلفن:</strong> @Model.Phone</p>
+    <p><strong>توضیحات:</strong> @Model.Description</p>
+    <p><strong>پیوست‌ها:</strong> @Model.Attachments</p>
+    <p><strong>وضعیت:</strong> @Model.Status</p>
+    <p><strong>پاسخ ادمین:</strong> @Model.AdminResponse</p>
+    <p><strong>تاریخ ثبت:</strong> @Model.CreatedAt.ToString("yyyy/MM/dd HH:mm")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

@@ -1,0 +1,20 @@
+﻿@model Application.DTOs.Orders.OrderDto
+@{
+    ViewData["Title"] = "تغییر وضعیت سفارش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>تغییر وضعیت سفارش #@Model.Id</h2>
+    <form method="post" asp-action="UpdateStatus">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="OrderId" value="@Model.Id" />
+        <div class="mb-3">
+            <label>وضعیت جدید</label>
+            <select name="Status" class="form-select bg-dark text-white" asp-items="Html.GetEnumSelectList<Domain.Enums.OrderStatus>()">
+                <option value="@Model.Status" selected>@Model.Status</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-gold">اعمال تغییرات</button>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

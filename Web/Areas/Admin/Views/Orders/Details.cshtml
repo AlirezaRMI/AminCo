@@ -1,0 +1,33 @@
+﻿@model Application.DTOs.Orders.OrderDto
+@{
+    ViewData["Title"] = "جزئیات سفارش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>سفارش #@Model.Id</h2>
+    <p><strong>کاربر:</strong> @Model.UserId</p>
+    <p><strong>تاریخ:</strong> @Model.OrderDate.ToString("yyyy/MM/dd HH:mm")</p>
+    <p><strong>آدرس ارسال:</strong> @Model.ShippingAddress</p>
+    <p><strong>روش پرداخت:</strong> @Model.PaymentMethod</p>
+    <p><strong>کد تخفیف:</strong> @Model.DiscountCode</p>
+    <p><strong>مبلغ کل:</strong> @Model.TotalAmount.ToString("N0") تومان</p>
+    <p><strong>وضعیت:</strong> @Model.Status</p>
+    <p><strong>پرداخت:</strong> @(Model.IsPaid ? "شده" : "نشده")</p>
+    <h4>آیتم‌های سفارش</h4>
+    <table class="table table-sm table-dark">
+        <thead><tr><th>محصول</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead>
+        <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("N0")</td>
+                <td>@(item.Quantity * item.UnitPrice).ToString("N0")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <a asp-action="UpdateStatus" asp-route-id="@Model.Id" class="btn btn-warning">تغییر وضعیت</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

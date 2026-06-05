@@ -1,0 +1,43 @@
+﻿@model Application.DTOs.Products.CreateProductDto
+@{
+    ViewData["Title"] = "ایجاد محصول";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ایجاد محصول جدید</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label>نام محصول</label>
+            <input asp-for="Name" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea asp-for="Description" class="form-control bg-dark text-white" rows="5"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>قیمت</label>
+            <input asp-for="Price" class="form-control bg-dark text-white" type="number" step="0.01" required />
+        </div>
+        <div class="mb-3">
+            <label>قیمت تخفیف (اختیاری)</label>
+            <input asp-for="DiscountPrice" class="form-control bg-dark text-white" type="number" step="0.01" />
+        </div>
+        <div class="mb-3">
+            <label>موجودی</label>
+            <input asp-for="StockQuantity" class="form-control bg-dark text-white" type="number" />
+        </div>
+        <div class="mb-3">
+            <label>تصویر اصلی</label>
+            <input asp-for="MainImageUrl" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>دسته‌بندی</label>
+            <select asp-for="CategoryId" class="form-select bg-dark text-white" asp-items="@(ViewData["Categories"] as SelectList)" required>
+                <option value="">انتخاب کنید</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

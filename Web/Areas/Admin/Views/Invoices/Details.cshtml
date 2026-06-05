@@ -1,0 +1,14 @@
+﻿@model Application.DTOs.Invoices.InvoiceDto
+@{
+    ViewData["Title"] = "جزئیات فاکتور";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>فاکتور @Model.InvoiceNumber</h2>
+    <p><strong>سفارش:</strong> #@Model.OrderId</p>
+    <p><strong>مبلغ:</strong> @Model.Amount.ToString("N0") تومان</p>
+    <p><strong>تاریخ:</strong> @Model.InvoiceDate.ToString("yyyy/MM/dd HH:mm")</p>
+    <p><strong>نوع:</strong> @(Model.IsFinal ? "نهایی" : "پیش‌فاکتور")</p>
+    <p><strong>آدرس PDF:</strong> @Model.PdfUrl</p>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

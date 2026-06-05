@@ -1,0 +1,28 @@
+﻿@model Application.DTOs.Portfolios.PortfolioDto
+@{
+    ViewData["Title"] = "جزئیات پروژه";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>@Model.Title</h2>
+    <p><strong>Slug:</strong> @Model.Slug</p>
+    <p><strong>توضیحات:</strong> @Model.Description</p>
+    <p><strong>مشتری:</strong> @Model.ClientName</p>
+    <p><strong>تاریخ پروژه:</strong> @(Model.ProjectDate?.ToString("yyyy/MM/dd") ?? "-")</p>
+    <p><strong>آدرس پروژه:</strong> <a href="@Model.ProjectUrl" target="_blank">@Model.ProjectUrl</a></p>
+    <p><strong>دسته‌بندی:</strong> @Model.Category</p>
+    <p><strong>ترتیب:</strong> @Model.DisplayOrder</p>
+    <p><strong>فعال:</strong> @(Model.IsActive ? "بله" : "خیر")</p>
+    <h4>تصاویر پروژه</h4>
+    <div class="row">
+        @foreach (var img in Model.Images)
+        {
+            <div class="col-md-3 mb-2">
+                <img src="@img.ImageUrl" class="img-fluid" />
+                <p>@img.Title</p>
+            </div>
+        }
+    </div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

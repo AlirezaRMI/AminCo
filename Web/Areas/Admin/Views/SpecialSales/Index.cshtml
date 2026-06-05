@@ -1,0 +1,67 @@
+﻿@model IReadOnlyList<Application.DTOs.SpecialSales.SpecialSaleDto>
+@{
+    ViewData["Title"] = "فروش‌های ویژه";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-between mb-3">
+    <h2>فروش‌های ویژه</h2>
+    <a asp-action="Create" class="btn btn-gold">+ فروش ویژه جدید</a>
+</div>
+
+<table class="table table-dark table-bordered">
+    <thead>
+        <tr><th>محصول</th><th>قیمت فروش ویژه</th><th>تاریخ شروع</th><th>تاریخ پایان</th><th>فعال</th><th>عملیات</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.SalePrice.ToString("N0") تومان</td>
+                <td>@item.StartDate.ToString("yyyy/MM/dd")</td>
+                <td>@item.EndDate.ToString("yyyy/MM/dd")</td>
+                <td>@(item.IsActive ? "فعال" : "غیرفعال")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">جزئیات</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">ویرایش</a>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-name="@item.ProductName">حذف</button>
+                 </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- مودال حذف مشابه قبل -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title">حذف فروش ویژه</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                آیا از حذف فروش ویژه برای محصول "<span id="deleteName"></span>" مطمئن هستید؟
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" asp-action="Delete">
+                    <input type="hidden" name="id" id="deleteId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var id = button.getAttribute('data-id');
+            var name = button.getAttribute('data-name');
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteName').innerText = name;
+        });
+    </script>
+}

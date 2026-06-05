@@ -1,0 +1,30 @@
+﻿@model Application.DTOs.Users.UpdateUserDto
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش کاربر</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>نام کامل</label>
+            <input asp-for="FullName" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>ایمیل</label>
+            <input asp-for="Email" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>شماره تماس</label>
+            <input asp-for="PhoneNumber" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">فعال</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

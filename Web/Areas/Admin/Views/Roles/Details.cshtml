@@ -1,0 +1,11 @@
+﻿@model Application.DTOs.Roles.RoleDto
+@{
+    ViewData["Title"] = "جزئیات نقش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>@Model.Name</h2>
+    <p><strong>فعال:</strong> @(Model.IsActive ? "بله" : "خیر")</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">ویرایش</a>
+    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+</div>

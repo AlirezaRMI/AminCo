@@ -1,0 +1,22 @@
+﻿@model Application.DTOs.CustomDesignRequests.UpdateCustomDesignRequestDto
+@{
+    ViewData["Title"] = "ویرایش درخواست";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش درخواست #@Model.Id</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>وضعیت</label>
+            <select asp-for="Status" class="form-select bg-dark text-white" asp-items="Html.GetEnumSelectList<Domain.Enums.RequestStatus>()"></select>
+        </div>
+        <div class="mb-3">
+            <label>پاسخ ادمین</label>
+            <textarea asp-for="AdminResponse" class="form-control bg-dark text-white" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

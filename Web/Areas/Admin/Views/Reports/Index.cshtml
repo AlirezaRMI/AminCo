@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "گزارشات";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>گزارشات مدیریتی</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-dark text-white p-3">
+                <h5>گزارش محصولات</h5>
+                <a asp-action="ProductsExcel" class="btn btn-gold mt-2">خروجی Excel</a>
+                <a asp-action="ProductsPdf" class="btn btn-warning mt-2">خروجی PDF</a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-dark text-white p-3">
+                <h5>گزارش سفارشات</h5>
+                <a asp-action="OrdersExcel" class="btn btn-gold mt-2">خروجی Excel</a>
+                <a asp-action="OrdersPdf" class="btn btn-warning mt-2">خروجی PDF</a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-dark text-white p-3">
+                <h5>گزارش کاربران</h5>
+                <a asp-action="UsersExcel" class="btn btn-gold mt-2">خروجی Excel</a>
+                <a asp-action="UsersPdf" class="btn btn-warning mt-2">خروجی PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-gold { background: #f5c542; color: #000; border-radius: 48px; padding: 6px 18px; }
+</style>

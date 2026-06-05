@@ -1,0 +1,30 @@
+﻿@model Application.DTOs.SpecialSales.UpdateSpecialSaleDto
+@{
+    ViewData["Title"] = "ویرایش فروش ویژه";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش فروش ویژه</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>محصول</label>
+            <select asp-for="ProductId" class="form-select bg-dark text-white" asp-items="@(ViewData["Products"] as SelectList)" required></select>
+        </div>
+        <div class="mb-3">
+            <label>قیمت فروش ویژه</label>
+            <input asp-for="SalePrice" class="form-control bg-dark text-white" type="number" step="0.01" required />
+        </div>
+        <div class="mb-3">
+            <label>تاریخ شروع</label>
+            <input asp-for="StartDate" class="form-control bg-dark text-white" type="date" required />
+        </div>
+        <div class="mb-3">
+            <label>تاریخ پایان</label>
+            <input asp-for="EndDate" class="form-control bg-dark text-white" type="date" required />
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

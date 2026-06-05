@@ -1,0 +1,34 @@
+﻿@model Application.DTOs.Sections.UpdateSectionDto
+@{
+    ViewData["Title"] = "ویرایش بخش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>ویرایش بخش</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>نام بخش</label>
+            <input asp-for="Name" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea asp-for="Description" class="form-control bg-dark text-white" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>آیکون</label>
+            <input asp-for="Icon" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>ترتیب نمایش</label>
+            <input asp-for="DisplayOrder" class="form-control bg-dark text-white" type="number" />
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">فعال</label>
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </form>
+</div>

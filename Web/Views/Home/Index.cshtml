@@ -1,8 +1,586 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomePageViewModel
+
+@{
+    ViewData["Title"] = "Home | Amin Co";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<main class="wraper">
+    <header class="top_header relative">
+        <nav class="nav_header reveal from-top">
+            <div class="header_logo">
+                <img src="~/public/img/header/AMINCO.png" alt="">
+            </div>
+            <ul class="ul_header">
+                <li><a data-i18n="con-us" href="#"></a></li>
+                <li><a data-i18n="news" href="#"></a></li>
+                <li class="relative" id="dropdown-parent">
+                    <a data-i18n="products" href="#" class="flex items-center gap-1" id="dropdown-btn"></a>
+                    <ul id="dropdown-menu" class="drop_ul">
+                        <li><a href="#" class="drop_li">تجهیزات آشپزخانه</a></li>
+                        <li><a href="#" class="drop_li">تجهیزات رستوران</a></li>
+                        <li><a href="#" class="drop_li">خدمات نصب</a></li>
+                        <li><a href="#" class="drop_li">مشاوره رایگان</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="lang-btn" id="langBtn" onclick="toggleLang()">
+                        <div class="lang-track"></div>
+                        <span class="lang-option active" id="enOpt">EN</span>
+                        <span class="lang-option inactive" id="faOpt">FA</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="header_small_baners reveal from-left">
+            <div class="small_baner_top" data-tilt>
+                <div class="smal_baner_txts">
+                    <div class="aroow">
+                        <div class="curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                    </div>
+                    <div class="small_baner_txt_wraper">
+                        <div class="smal_baber_light_txt"><p>پکیج اقتصادی</p></div>
+                        <div class="smal_baber_bold_txt"><p>راه اندازی رستوران</p></div>
+                    </div>
+                </div>
+                <div class="small_baner_img_wraper"><img
+                        src="~/public/img/header/item_img/file_00000000e268720a840863324aa5bf15 1.png" alt=""></div>
+            </div>
+            <div class="small_baner_bottom" data-tilt>
+                <div class="smal_baner_txts_bottom">
+                    <div class="aroow">
+                        <div class="curcle_bottom"><img src="~/public/img/header/whiteArrow.png" alt=""></div>
+                    </div>
+                    <div class="small_baner_txt_wraper">
+                        <div class="smal_baber_light_txt_bottom"><p>پکیج اقتصادی</p></div>
+                        <div class="smal_baber_bold_txt_bottom"><p>راه اندازی رستوران</p></div>
+                    </div>
+                </div>
+                <div class="small_baner_img_wraper"><img
+                        src="~/public/img/header/item_img/file_00000000e268720a840863324aa5bf15 1.png" alt=""></div>
+            </div>
+        </div>
+
+        <div class="w-[75%] h-full reveal from-right">
+            <div class="header_rounded_baner" data-tilt data-tilt-strength="5">
+                <div class="rounded_img">
+                    <img src="~/public/img/header/item_img/file_00000000e268720a840863324aa5bf15 1.png" alt="">
+                </div>
+                <div class="rounded_txt">
+                    <div class="rounded_light_txt"><p data-i18n="desigin"></p></div>
+                    <div class="rounded_bold_txt">
+                        <p data-i18n="Industrial">
+                            @(Model.AboutUs?.Title ?? "تجهیزات آشپزخانه های صنعتی")
+                        </p>
+                    </div>
+                    <div class="rounded_dec">
+                        <p>
+                            @(Model.AboutUs?.Content?.Length > 150 ? Model.AboutUs.Content.Substring(0, 150) + "..." : Model.AboutUs?.Content)
+                        </p>
+                    </div>
+                    <div class="header_btn_wraper">
+                        <a class="header_btn reveal from-right">
+                            <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                            <div class="counsel_link_txt"><p>مشاهده خدمات</p></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="statistics">
+                    <div class="statistics_box">
+                        <span data-target="@Model.StatCustomers">0</span>
+                        <p class="statistics_dec">مشتری راضی</p>
+                    </div>
+                    <div class="line"></div>
+                    <div class="statistics_box">
+                        <span data-target="@Model.StatProjects">0</span>
+                        <p class="statistics_dec">پروژه انجام شده</p>
+                    </div>
+                    <div class="line"></div>
+                    <div class="statistics_box">
+                        <span data-target="@Model.StatYears">0</span>
+                        <p class="statistics_dec">سال تجربه</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ========== end top header ithems ========== -->
+
+    <!-- ========== mobile header (همان کد اصلی) ========== -->
+    <header class="mobile_header">
+        <div class="mobile_menu_wraper reveal from-top">
+            <button class="burger_btn_wraper" id="burger-btn">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+            <div id="mobile-menu" class="mobile_menu">
+                <ul class="mobile_ul">
+                    <li><a href="#" class="mobile_li">ارتباط با ما</a></li>
+                    <li><a href="#" class="mobile_li">اخبار و مقالات</a></li>
+                    <li class="flex flex-col items-center gap-3 w-full text-center">
+                        <a href="#" class="flex items-center justify-center gap-2" id="mobile-dropdown-btn">
+                            محصولات و خدمات
+                            <svg id="mobile-arrow" class="w-3 h-3 transition-transform duration-300" viewBox="0 0 12 12"
+                                 fill="none">
+                                <path d="M2 4L6 8L10 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <ul id="mobile-dropdown" class="mobile_drop_ul">
+                            <li><a href="#" class="mobile_drop_li">تجهیزات آشپزخانه</a></li>
+                            <li><a href="#" class="mobile_drop_li">تجهیزات رستوران</a></li>
+                            <li><a href="#" class="mobile_drop_li">خدمات نصب</a></li>
+                            <li><a href="#" class="mobile_drop_li">مشاوره رایگان</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <button class="lang-btn z-50" id="langBtn_mobile" onclick="toggleLang()">
+                <div class="lang-track"></div>
+                <span class="lang-option active" id="enOpt_mobile">EN</span>
+                <span class="lang-option inactive" id="faOpt_mobile">FA</span>
+            </button>
+        </div>
+        <div class="mobile_rounded_baner reveal from-left">
+            <div class="mobile_rounded_baner_txt_wraper">
+                <div class="mobile_rounded_baner_txt_light"><p>طراحی و ساخت انواع</p></div>
+                <div class="mobile_rounded_baner_txt_bold"><p>تجهیزات آشپزخانه های صنعتی</p></div>
+            </div>
+            <div class="mobile_rounded_img_wraper">
+                <div class="mobile_rounded_section">
+                    <div class="mobile_rounded_btn">
+                        <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                        <div class="counsel_link_txt"><p>مشاهده خدمات</p></div>
+                    </div>
+                    <div class="nums">
+                        <div class="statistics">
+                            <div class="statistics_box"><span data-target="4000">0</span>
+                                <p class="statistics_dec">آمار پیش فرض</p></div>
+                            <div class="line"></div>
+                            <div class="statistics_box"><span data-target="34500">0</span>
+                                <p class="statistics_dec">آمار پیش فرض</p></div>
+                            <div class="line"></div>
+                            <div class="statistics_box"><span data-target="100">0</span>
+                                <p class="statistics_dec">آمار پیش فرض</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile_rounded_section"><img
+                        src="~/public/img/header/item_img/file_00000000e268720a840863324aa5bf15 1.png" alt=""></div>
+            </div>
+        </div>
+        <div class="mobile_small_section_wraper">
+            <div class="mobile_small_baner_l reveal from-left">
+                <img class="object-scale-down"
+                     src="~/public/img/header/item_img/file_00000000e268720a840863324aa5bf15 1.png" alt="">
+                <div class="smal_baner_mobile_txt_wraper">
+                    <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                    <div class="small_baner_txt_wraper">
+                        <div class="smal_baber_light_txt"><p>پکیج اقتصادی</p></div>
+                        <div class="smal_baber_bold_txt"><p>راه اندازی رستوران</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile_small_baner_r reveal from-right">
+                <img class="object-scale-down"
+                     src="~/public/img/header/item_img/file_00000000e268720a840863324aa5bf15 1.png" alt="">
+                <div class="smal_baner_mobile_txt_wraper">
+                    <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                    <div class="small_baner_txt_wraper">
+                        <div class="smal_baber_light_txt"><p>پکیج اقتصادی</p></div>
+                        <div class="smal_baber_bold_txt"><p>راه اندازی رستوران</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== slider ========== -->
+    <section class="sliders_wraper">
+        <div class="slider_l reveal from-left">
+            <div class="slider_link">
+                <div class="svg_link">
+                    <div class="curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                </div>
+                <div class="txt_link"><p>مشاهده اطلاعات بیشتر</p></div>
+            </div>
+            <img class="slider_img_l" src="~/public/img/slider/be401fe22be8e7c8de1fd25af44a40083a5fd4db.jpg" alt="">
+            <div class="slider_r_txt"><p>پکیج اقتصادی راه اندازی رستوران</p></div>
+        </div>
+        <div class="slider_r reveal from-right">
+            <div class="slider_link">
+                <div class="svg_link">
+                    <div class="curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                </div>
+                <div class="txt_link"><p>مشاهده اطلاعات بیشتر</p></div>
+            </div>
+            <div class="slider_img_wraper">
+                <img class="slider_img_r" src="~/public/img/slider/373bf71029f1da36a550ede13341184ecb1efb8b.png" alt="">
+                <img class="slider_img_r" src="~/public/img/slider/76a498113b01496ae01e2d24bb8b4099f4e58b35.png" alt="">
+                <img class="slider_img_r" src="~/public/img/slider/868db20882489476420c0a166f66863e90bb3c96.jpg" alt="">
+                <img class="slider_img_r" src="~/public/img/slider/be401fe22be8e7c8de1fd25af44a40083a5fd4db.jpg" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== services ========== -->
+    <section class="services">
+        <div class="service_title">
+            <h1 class="service_title_txt reveal from-left">!مجموعه خدماتی که ما ارائه میدهیم</h1>
+            <p class="service_dec reveal from-right">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+                استفاده از طراحان گرافیک است،نچنان که</p>
+        </div>
+        <div class="service_box_wraper">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="service_box group reveal from-top">
+                    <div class="hover_service_box"></div>
+                    <div class="box_title"><h3>نصب و راه اندازی</h3></div>
+                    <div class="box_txt"><p>خدمات پس از فروش بخش مهمی از تمام خدمات است. این مجموعه به خوبی از نیازهای
+                            پس از فروش مشتریان خود آگاه است.</p></div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- ========== swiper (نمونه کارها) ========== -->
+    <section class="swiper_wraper">
+        <div class="swiper_txt_wraper reveal from-right">
+            <div class="swiper_link_wraper">
+                <a href="#" class="swiper_link reveal from-right">
+                    <img class="w-5 h-3.5" src="~/public/img/news/svgs/Vector 2343.png" alt="">
+                    <p>مشاهده همه</p>
+                </a>
+            </div>
+            <div class="swiper_txt">
+                <div class="swiper_txt_bold"><p>آخرین پـــــروژه های شرکت</p></div>
+                <div class="swiper_txt_light"><p>در این بخش آخرین پروژه های امیـــــــــن کو را ببینید</p></div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="carousel-section">
+                <div class="carousel-wrap" id="carousel">
+                    <div class="carousel-track" id="track">
+                        @if (Model.Portfolios != null)
+                        {
+                            foreach (var portfolio in Model.Portfolios)
+                            {
+                                var mainImage = portfolio.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl
+                                                ?? portfolio.Images.FirstOrDefault()?.ImageUrl
+                                                ?? "~/public/img/swiper/pexels-pixabay-41953.jpg";
+                                <div class="card" data-index="0">
+                                    <img src="@mainImage" alt="@portfolio.Title">
+                                    <div class="card-caption">
+                                        <h3>@portfolio.Title</h3>
+                                        <a href="#">مشاهده جزئیات
+                                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                                                <path d="M10 7H4M4 7L7 4M4 7L7 10" stroke="currentColor"
+                                                      stroke-width="1.4" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="desktop-nav">
+                    <div class="nav-btn" id="btn-prev">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M10 12L6 8L10 4" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="dots" id="dots"></div>
+                    <div class="nav-btn" id="btn-next">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4L10 8L6 12" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-slider">
+                <div class="mobile-track-wrap">
+                    <div class="mobile-track" id="m-track">
+                        @if (Model.Portfolios != null)
+                        {
+                            foreach (var portfolio in Model.Portfolios)
+                            {
+                                var mainImage = portfolio.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl
+                                                ?? portfolio.Images.FirstOrDefault()?.ImageUrl
+                                                ?? "~/public/img/swiper/pexels-pixabay-41953.jpg";
+                                <div class="mobile-card">
+                                    <img src="@mainImage" alt="@portfolio.Title">
+                                    <div class="mobile-caption">
+                                        <h3>@portfolio.Title</h3>
+                                        <a href="#">مشاهده جزئیات
+                                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                                                <path d="M10 7H4M4 7L7 4M4 7L7 10" stroke="currentColor"
+                                                      stroke-width="1.4" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="mobile-nav">
+                    <div class="mobile-nav-btn" id="m-prev">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M10 12L6 8L10 4" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="mobile-dots" id="m-dots"></div>
+                    <div class="mobile-nav-btn" id="m-next">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4L10 8L6 12" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cooperation_pattern"><img src="~/public/img/cooperation/pattern.png" alt=""></div>
+    </section>
+
+    <!-- ========== about us ========== -->
+    <section class="aboutus">
+        <div class="amin_logo reveal from-left">
+            <img class="w-1/2 h-full object-scale-down" src="~/public/img/about_us/AMINCO.png" alt="">
+        </div>
+        <div class="aboutus_more">
+            <div class="aboutus_video_wraper reveal from-left">
+                <video class="about_us_video" autoplay muted loop playsinline
+                       src="~/public/img/about_us/video/-5832957886656549323.MP4"></video>
+            </div>
+            <div class="aboutus_txt">
+                <div class="texts reveal from-right">
+                    <div class="txt"><h3>درباره ما</h3></div>
+                    <div class="txt_bold"><h3>!بیشتر بدانید</h3></div>
+                </div>
+                <div class="txt_dec no-scrollbar reveal from-bottom">
+                    @Html.Raw(Model.AboutUs?.Content?.Replace("\n", "<br/>") ?? "متن پیش‌فرض درباره ما")
+                </div>
+                <div class="social_pages">
+                    <a href="#" class="curcle_social_page reveal from-bottom"><img class="icn"
+                                                                                   src="~/public/img/about_us/pges_svg/Shape.png"
+                                                                                   alt=""></a>
+                    <a href="#" class="curcle_social_page_in reveal from-top"><img class="icn"
+                                                                                   src="~/public/img/about_us/pges_svg/linkedin-fill-svgrepo-com 1.png"
+                                                                                   alt=""></a>
+                    <a href="#" class="curcle_social_page reveal from-bottom"><img class="icn"
+                                                                                   src="~/public/img/about_us/pges_svg/Vector (6).png"
+                                                                                   alt=""></a>
+                    <a href="#" class="curcle_social_page reveal from-left"><img class="icn"
+                                                                                 src="~/public/img/about_us/pges_svg/Vector (7).png"
+                                                                                 alt=""></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== cooperation ========== -->
+    <section class="cooperation reveal from-bottom">
+        <div class="cooperation_txts">
+            <div class="cooperation_header reveal from-left"><h3>ماهمواره مفتخریم به همکاری با</h3></div>
+            <div class="cooperation_header_bold reveal from-right"><h3>صد ها شرکت معتـــــــبر</h3></div>
+            <div class="cooperation_dec reveal from-bottom"><p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
+                    چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و</p></div>
+        </div>
+        <div class="companys">
+            <div class="company_section reveal from-left">
+                <div class="company_style_odd group">
+                    <div class="hover_company_style_odd"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_even group">
+                    <div class="hover_company_style_even"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_odd group">
+                    <div class="hover_company_style_odd"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_even group">
+                    <div class="hover_company_style_even"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_odd group">
+                    <div class="hover_company_style_odd"></div>
+                    <p class="z-10">AZARIN</p></div>
+            </div>
+            <div class="company_section reveal from-right">
+                <div class="company_style_even group">
+                    <div class="hover_company_style_even"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_odd group">
+                    <div class="hover_company_style_odd"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_even group">
+                    <div class="hover_company_style_even"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_odd group">
+                    <div class="hover_company_style_odd"></div>
+                    <p class="z-10">AZARIN</p></div>
+                <div class="company_style_even group">
+                    <div class="hover_company_style_even"></div>
+                    <p class="z-10">AZARIN</p></div>
+            </div>
+        </div>
+        <div class="cooperation_pattern"><img src="~/public/img/cooperation/pattern.png" alt=""></div>
+        <div class="cooperation_flash"><img src="~/public/img/cooperation/Flash.png" alt=""></div>
+    </section>
+
+    <!-- ========== Counseling ========== -->
+    <section class="counsel">
+        <div class="counsel_box reveal from-right">
+            <div class="counsel_box_wraper">
+                <div class="counsoel_dec reveal from-bottom"><p>نیروهای متخصص ما راهنمای شما در توسعه کسب و کارتان
+                        خواهند بود</p></div>
+                <div class="counsel_txt_wraper reveal from-top">
+                    <div class="counsel_txt"><p>نیاز به</p></div>
+                    <div class="counsel_txt_bold"><p>مشاوره دارید؟</p></div>
+                </div>
+                <div class="xl:w-[441px] w-[150px] xl:h-[455px] h-[160px] absolute z-10 left-0"><img
+                        class="object-scale-down" src="~/public/img/counsel/pattern.png" alt=""></div>
+            </div>
+        </div>
+        <div class="counsel_link_wraper reveal from-left">
+            <a class="counsel_link" href="#">
+                <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
+                <div class="counsel_link_txt"><p>با ما تماس بگیرید</p></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== news (آخرین اخبار و مقالات) ========== -->
+    <section class="news">
+        <div class="news_txt reveal from-top">
+            <div class="news_header"><h3>آخرین اخبار و مقالات</h3></div>
+            <div class="news_dec_header_wraper"><p class="max-w-125">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
+                    صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و</p></div>
+        </div>
+        <div class="news_box_wraper">
+            @if (Model.LatestArticles != null)
+            {
+                foreach (var article in Model.LatestArticles.Take(3))
+                {
+                    <div class="news_box group reveal from-left">
+                        <div class="news_img_wraper">
+                            <img class="news_img"
+                                 src="@(article.MainImageUrl ?? "~/public/img/slider/be401fe22be8e7c8de1fd25af44a40083a5fd4db.jpg")"
+                                 alt="@article.Title">
+                            <div class="hover_news_img"></div>
+                            <div class="news_btn_hover_wraper">
+                                <a class="news_btn_hover" href="/Article/@article.Slug"><span>←</span>مطالعه مقاله</a>
+                            </div>
+                        </div>
+                        <div class="news_dec">
+                            <div class="news_dec_header"><h3>@article.Title</h3></div>
+                            <div class="news_dec_txt no-scrollbar"><p>@article.ShortDescription</p></div>
+                            <div class="person_hour">
+                                <div class="hour" dir="rtl">
+                                    <img class="w-4.25 h-4.25" src="~/public/img/news/svgs/Time.png" alt="">
+                                    <p>@((DateTime.Now - article.PublishDate).Days) روز پیش</p>
+                                </div>
+                                <div class="person" dir="rtl">
+                                    <img class="w-4.25 h-4.25 object-scale-down" src="~/public/img/news/svgs/Mail.png"
+                                         alt="">
+                                    <p>تحریریه</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <a href="#" class="show_all_wraper reveal from-right">
+                <img class="w-5 h-3.5" src="~/public/img/news/svgs/Vector 2343.png" alt="">
+                <p>مشاهده همه</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== contact us ========== -->
+    <section class="contact_us">
+        <div class="cooperation_txts reveal from-top">
+            <div class="cooperation_header"><h3>برای مشاوره رایگان</h3></div>
+            <div class="cooperation_header_bold"><h3>با ما در ارتبـــــــــاط باشید</h3></div>
+            <div class="cooperation_dec reveal from-bottom">
+                <p>@(Model.ContactInfo?.Address ?? "لورم ایپسوم متن ساختگی...")</p></div>
+        </div>
+        <form class="contact_us_form reveal from-bottom" asp-controller="Home" asp-action="SubmitContact" method="post">
+            @Html.AntiForgeryToken()
+            <label class="contact_us_lable reveal from-top" for="FullName">نام و نام خانوادگی</label>
+            <input class="contact_us_input reveal from-top" type="text" id="FullName" name="FullName"
+                   placeholder="فرزاد هاشمی" required>
+            <label class="contact_us_lable reveal from-top" for="PhoneNumber">شماره تماس</label>
+            <input class="contact_us_input reveal from-top" type="text" id="PhoneNumber" name="PhoneNumber"
+                   placeholder="0913*******" required>
+            <label class="contact_us_lable reveal from-top" for="Description">توضیحات</label>
+            <input class="contact_us_input_dec reveal from-top" type="text" id="Description" name="Description">
+            <div
+                class="w-full h-[60px] text-white flex justify-end items-center gap-2 xl:text-[14px] font-normal text-[12px] text-right">
+                <label class="reveal from-bottom" for="AgreePrivacy">شما با سیاست حفظ حریم خصوصی دوستانه ما موافقت
+                    می‌کنید</label>
+                <input class="size-4" type="checkbox" id="AgreePrivacy" name="AgreePrivacy" value="true">
+            </div>
+            <button class="contact_us_form_btn reveal from-bottom" type="submit">ارسال پیام</button>
+        </form>
+        <div class="top_pattern"><img src="~/public/img/contact_us/pattern/paatterntop.png" alt=""></div>
+        <div class="bottom_pattern"><img src="~/public/img/contact_us/pattern/patternbottom.png" alt=""></div>
+        <div class="flash_pattern"><img src="~/public/img/contact_us/flash.png" alt=""></div>
+    </section>
+
+    <!-- ========== baner ========== -->
+    <section class="baner_wraper">
+        <div class="baner reveal from-left">
+            <div class="scrool">
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+                <p>Amin Co</p>
+            </div>
+        </div>
+        <div class="baner_rotate reveal from-right"></div>
+    </section>
+
+    <!-- ========== footer ========== -->
+    <footer class="footer_wraper reveal from-bottom">
+        <div class="footer_items">
+            <div class="footer_curcle_wraper reveal from-left">
+                <div class="footer_curcle">
+                    <div class="footer_flash"><img src="~/public/img/footer/Arrow.png" alt=""></div>
+                    <div class="text_curcle"><img src="~/public/img/footer/Group 2085663503 (1).png" alt=""></div>
+                </div>
+            </div>
+            <div class="footer_header reveal from-right"><h3 data-i18n="com">@(Model.AboutUs?.Title ?? "امین کو")</h3>
+            </div>
+            <div class="footer_dec reveal from-right"><p
+                    data-i18n="f-dec">@(Model.ContactInfo?.Address ?? "آدرس شرکت")</p></div>
+            <div class="footer_links reveal from-left">
+                <a class="footer_last_link" href="#">صفحه اصلی</a>
+                <a class="footer_link" href="#">صفحه اصلی</a>
+                <a class="footer_link" href="#">صفحه اصلی</a>
+                <a class="footer_first_link" href="#">صفحه اصلی</a>
+            </div>
+            <div class="footer_txt reveal from-bottom"><p>.کلیــه حقـوق مادی و معنـوی متعلق به شرکت امین می باشد</p>
+            </div>
+        </div>
+    </footer>
+</main>
+
+@section Scripts {
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof VanillaTilt !== 'undefined') {
+                VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {max: 5, speed: 400});
+            }
+        });
+    </script>
+}

@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Application.Logics.Intefaces;
-using Application.Logics.Services;
 using Domain.Contract;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Web.Filters;
 using Web.Securities;
 using Web.Services;
 
@@ -60,7 +60,7 @@ namespace Web
             
             services.AddHttpContextAccessor();
             services.AddScoped<IFileUploadService, FileUploadService>();
-
+            services.AddScoped<AdminAuthFilter>();
             services.AddScoped<IUserContextService, UserContextService>();
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddSingleton<IJwtService, JwtService>();

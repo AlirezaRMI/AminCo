@@ -8,7 +8,7 @@ namespace Application.Logics.Intefaces
         Task<UserDto> GetByIdAsync(long id);
         Task<UserDto> GetByEmailAsync(string email);
         Task<UserDto> UpdateAsync(UpdateUserDto dto);
-        
+        Task<List<string>> GetRolesAsync(long userId);
         Task<List<UserDto>> GetAllAsync();
         Task DeleteAsync(long id);
         Task<bool> ValidateCredentialsAsync(string email, string password);

@@ -1,0 +1,33 @@
+﻿@model Application.DTOs.ContactInfo.ContactInfoDto
+@{
+    ViewData["Title"] = "مدیریت اطلاعات تماس";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-dashboard p-4">
+    <h2>اطلاعات تماس</h2>
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div class="mb-3">
+            <label>تلفن</label>
+            <input type="text" name="Phone" value="@Model.Phone" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>ایمیل</label>
+            <input type="email" name="Email" value="@Model.Email" class="form-control bg-dark text-white" required />
+        </div>
+        <div class="mb-3">
+            <label>آدرس</label>
+            <textarea name="Address" rows="3" class="form-control bg-dark text-white" required>@Model.Address</textarea>
+        </div>
+        <div class="mb-3">
+            <label>ساعات کاری</label>
+            <input type="text" name="WorkingHours" value="@Model.WorkingHours" class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+            <label>نقشه گوگل URL</label>
+            <input type="text" name="GoogleMapUrl" value="@Model.GoogleMapUrl" class="form-control bg-dark text-white" />
+        </div>
+        <button type="submit" class="btn btn-gold">ذخیره تغییرات</button>
+    </form>
+</div>

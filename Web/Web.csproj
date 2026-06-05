@@ -42,13 +42,28 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Include="wwwroot\public\i18next\.claude\settings.local.json" />
     </ItemGroup>
     
     
 
     <ItemGroup>
       <Folder Include="Areas\Admin\ViewModels\" />
-      <Folder Include="wwwroot\admin-lte\" />
+    </ItemGroup>
+    
+    
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+    </ItemGroup>
+    
+    
+
+    <ItemGroup>
+      <TypeScriptCompile Include="wwwroot\public\i18next\index.d.ts" />
+      <TypeScriptCompile Include="wwwroot\public\i18next\typescript\helpers.d.ts" />
+      <TypeScriptCompile Include="wwwroot\public\i18next\typescript\options.d.ts" />
+      <TypeScriptCompile Include="wwwroot\public\i18next\typescript\t.d.ts" />
     </ItemGroup>
 
 </Project>
