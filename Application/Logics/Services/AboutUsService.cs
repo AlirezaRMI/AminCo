@@ -13,20 +13,28 @@ namespace Application.Logics.Services
     {
         public async Task<AboutUsDto> GetAsync()
         {
-            var entity = await repo.GetSingleAsync(a => a.Id == 1 && !a.IsDeleted);
+            var entity = await repo.GetSingleAsync(a => !a.IsDeleted);
             if (entity == null)
             {
                 logger.LogWarning("AboutUs record not found, creating default");
-                entity = new AboutUs { Id = 1, Title = "درباره ما", Content = "", LastUpdated = DateTime.UtcNow };
+                entity = new AboutUs
+                {
+                    Title = "Amin Co – Industrial Kitchen Equipment Manufacturer in Iran",
+                    Content =
+                        "Amin Co has been designing and manufacturing industrial kitchen equipment in Iran since 2008...",
+                    LastUpdated = DateTime.UtcNow,
+                    IsActive = true
+                };
                 await repo.AddEntity(entity);
                 await repo.SaveChangesAsync();
             }
+
             return mapper.Map<AboutUsDto>(entity);
         }
 
         public async Task<AboutUsDto> UpdateAsync(UpdateAboutUsDto dto)
         {
-            var entity = await repo.GetSingleAsync(a => a.Id == 1);
+            var entity = await repo.GetSingleAsync(a => !a.IsDeleted);
             if (entity == null)
                 throw new NotFoundException("اطلاعات درباره ما یافت نشد.");
             mapper.Map(dto, entity);
@@ -35,5 +43,6 @@ namespace Application.Logics.Services
             await repo.SaveChangesAsync();
             return mapper.Map<AboutUsDto>(entity);
         }
+        
     }
 }

@@ -1,5 +1,4 @@
 ﻿@model HomePageViewModel
-
 @{
     ViewData["Title"] = "Home | Amin Co";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,18 +8,18 @@
     <header class="top_header relative">
         <nav class="nav_header reveal from-top">
             <div class="header_logo">
-                <img src="~/public/img/header/AMINCO.png" alt="">
+                <img src="~/public/img/header/AMINCO.png" alt="AminCo">
             </div>
             <ul class="ul_header">
-                <li><a data-i18n="con-us" href="#"></a></li>
-                <li><a data-i18n="news" href="#"></a></li>
+                <li><a data-i18n="con-us" href="#">Contact Us</a></li>
+                <li><a data-i18n="news" href="#">News</a></li>
                 <li class="relative" id="dropdown-parent">
-                    <a data-i18n="products" href="#" class="flex items-center gap-1" id="dropdown-btn"></a>
+                    <a data-i18n="products" href="#" class="flex items-center gap-1" id="dropdown-btn">Products</a>
                     <ul id="dropdown-menu" class="drop_ul">
-                        <li><a href="#" class="drop_li">تجهیزات آشپزخانه</a></li>
-                        <li><a href="#" class="drop_li">تجهیزات رستوران</a></li>
-                        <li><a href="#" class="drop_li">خدمات نصب</a></li>
-                        <li><a href="#" class="drop_li">مشاوره رایگان</a></li>
+                        <li><a href="#" class="drop_li">Kitchen Equipment</a></li>
+                        <li><a href="#" class="drop_li">Restaurant Equipment</a></li>
+                        <li><a href="#" class="drop_li">Installation Services</a></li>
+                        <li><a href="#" class="drop_li">Free Consulting</a></li>
                     </ul>
                 </li>
                 <li>
@@ -40,8 +39,8 @@
                         <div class="curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
                     </div>
                     <div class="small_baner_txt_wraper">
-                        <div class="smal_baber_light_txt"><p>پکیج اقتصادی</p></div>
-                        <div class="smal_baber_bold_txt"><p>راه اندازی رستوران</p></div>
+                        <div class="smal_baber_light_txt"><p data-i18n="economy_package">Economy Package</p></div>
+                        <div class="smal_baber_bold_txt"><p data-i18n="restaurant_setup">Restaurant Setup</p></div>
                     </div>
                 </div>
                 <div class="small_baner_img_wraper"><img
@@ -53,8 +52,10 @@
                         <div class="curcle_bottom"><img src="~/public/img/header/whiteArrow.png" alt=""></div>
                     </div>
                     <div class="small_baner_txt_wraper">
-                        <div class="smal_baber_light_txt_bottom"><p>پکیج اقتصادی</p></div>
-                        <div class="smal_baber_bold_txt_bottom"><p>راه اندازی رستوران</p></div>
+                        <div class="smal_baber_light_txt_bottom"><p data-i18n="economy_package">Economy Package</p>
+                        </div>
+                        <div class="smal_baber_bold_txt_bottom"><p data-i18n="restaurant_setup">Restaurant Setup</p>
+                        </div>
                     </div>
                 </div>
                 <div class="small_baner_img_wraper"><img
@@ -70,68 +71,61 @@
                 <div class="rounded_txt">
                     <div class="rounded_light_txt"><p data-i18n="desigin"></p></div>
                     <div class="rounded_bold_txt">
-                        <p data-i18n="Industrial">
-                            @(Model.AboutUs?.Title ?? "تجهیزات آشپزخانه های صنعتی")
-                        </p>
+                        <p data-i18n="Industrial">@(Model.AboutUs?.Title ?? "Industrial Kitchen Equipment")</p>
                     </div>
                     <div class="rounded_dec">
-                        <p>
-                            @(Model.AboutUs?.Content?.Length > 150 ? Model.AboutUs.Content.Substring(0, 150) + "..." : Model.AboutUs?.Content)
-                        </p>
+                        <p>@(Model.AboutUs?.Content?.Length > 150 ? Model.AboutUs.Content.Substring(0, 150) + "..." : Model.AboutUs?.Content)</p>
                     </div>
                     <div class="header_btn_wraper">
-                        <a class="header_btn reveal from-right">
+                        <a class="header_btn reveal from-right" href="/Home/UnderConstruction">
                             <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
-                            <div class="counsel_link_txt"><p>مشاهده خدمات</p></div>
+                            <div class="counsel_link_txt"><p data-i18n="view_services">View Services</p></div>
                         </a>
                     </div>
                 </div>
                 <div class="statistics">
                     <div class="statistics_box">
                         <span data-target="@Model.StatCustomers">0</span>
-                        <p class="statistics_dec">مشتری راضی</p>
+                        <p class="statistics_dec" data-i18n="happy_customers">Happy Customers</p>
                     </div>
                     <div class="line"></div>
                     <div class="statistics_box">
                         <span data-target="@Model.StatProjects">0</span>
-                        <p class="statistics_dec">پروژه انجام شده</p>
+                        <p class="statistics_dec" data-i18n="projects_completed">Projects Completed</p>
                     </div>
                     <div class="line"></div>
                     <div class="statistics_box">
                         <span data-target="@Model.StatYears">0</span>
-                        <p class="statistics_dec">سال تجربه</p>
+                        <p class="statistics_dec" data-i18n="years_experience">Years Experience</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ========== end top header ithems ========== -->
 
-    <!-- ========== mobile header (همان کد اصلی) ========== -->
+    <!-- ========== هدر موبایل (همان با متن انگلیسی) ========== -->
     <header class="mobile_header">
         <div class="mobile_menu_wraper reveal from-top">
             <button class="burger_btn_wraper" id="burger-btn">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
+                <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
             </button>
             <div id="mobile-menu" class="mobile_menu">
                 <ul class="mobile_ul">
-                    <li><a href="#" class="mobile_li">ارتباط با ما</a></li>
-                    <li><a href="#" class="mobile_li">اخبار و مقالات</a></li>
+                    <li><a href="#" class="mobile_li" data-i18n="con-us">Contact Us</a></li>
+                    <li><a href="#" class="mobile_li" data-i18n="news">News</a></li>
                     <li class="flex flex-col items-center gap-3 w-full text-center">
                         <a href="#" class="flex items-center justify-center gap-2" id="mobile-dropdown-btn">
-                            محصولات و خدمات
+                            <span data-i18n="products">Products & Services</span>
                             <svg id="mobile-arrow" class="w-3 h-3 transition-transform duration-300" viewBox="0 0 12 12"
                                  fill="none">
                                 <path d="M2 4L6 8L10 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                             </svg>
                         </a>
                         <ul id="mobile-dropdown" class="mobile_drop_ul">
-                            <li><a href="#" class="mobile_drop_li">تجهیزات آشپزخانه</a></li>
-                            <li><a href="#" class="mobile_drop_li">تجهیزات رستوران</a></li>
-                            <li><a href="#" class="mobile_drop_li">خدمات نصب</a></li>
-                            <li><a href="#" class="mobile_drop_li">مشاوره رایگان</a></li>
+                            <li><a href="#" class="mobile_drop_li">Kitchen Equipment</a></li>
+                            <li><a href="#" class="mobile_drop_li">Restaurant Equipment</a></li>
+                            <li><a href="#" class="mobile_drop_li">Installation Services</a></li>
+                            <li><a href="#" class="mobile_drop_li">Free Consulting</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -144,25 +138,26 @@
         </div>
         <div class="mobile_rounded_baner reveal from-left">
             <div class="mobile_rounded_baner_txt_wraper">
-                <div class="mobile_rounded_baner_txt_light"><p>طراحی و ساخت انواع</p></div>
-                <div class="mobile_rounded_baner_txt_bold"><p>تجهیزات آشپزخانه های صنعتی</p></div>
+                <div class="mobile_rounded_baner_txt_light"><p data-i18n="desigin"></p></div>
+                <div class="mobile_rounded_baner_txt_bold"><p data-i18n="Industrial">Industrial Kitchen Equipment</p>
+                </div>
             </div>
             <div class="mobile_rounded_img_wraper">
                 <div class="mobile_rounded_section">
                     <div class="mobile_rounded_btn">
                         <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
-                        <div class="counsel_link_txt"><p>مشاهده خدمات</p></div>
+                        <div class="counsel_link_txt"><p data-i18n="view_services">View Services</p></div>
                     </div>
                     <div class="nums">
                         <div class="statistics">
                             <div class="statistics_box"><span data-target="4000">0</span>
-                                <p class="statistics_dec">آمار پیش فرض</p></div>
+                                <p class="statistics_dec" data-i18n="happy_customers">Happy Customers</p></div>
                             <div class="line"></div>
                             <div class="statistics_box"><span data-target="34500">0</span>
-                                <p class="statistics_dec">آمار پیش فرض</p></div>
+                                <p class="statistics_dec" data-i18n="projects_completed">Projects Completed</p></div>
                             <div class="line"></div>
                             <div class="statistics_box"><span data-target="100">0</span>
-                                <p class="statistics_dec">آمار پیش فرض</p></div>
+                                <p class="statistics_dec" data-i18n="years_experience">Years Experience</p></div>
                         </div>
                     </div>
                 </div>
@@ -177,8 +172,8 @@
                 <div class="smal_baner_mobile_txt_wraper">
                     <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
                     <div class="small_baner_txt_wraper">
-                        <div class="smal_baber_light_txt"><p>پکیج اقتصادی</p></div>
-                        <div class="smal_baber_bold_txt"><p>راه اندازی رستوران</p></div>
+                        <div class="smal_baber_light_txt"><p data-i18n="economy_package">Economy Package</p></div>
+                        <div class="smal_baber_bold_txt"><p data-i18n="restaurant_setup">Restaurant Setup</p></div>
                     </div>
                 </div>
             </div>
@@ -188,32 +183,32 @@
                 <div class="smal_baner_mobile_txt_wraper">
                     <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
                     <div class="small_baner_txt_wraper">
-                        <div class="smal_baber_light_txt"><p>پکیج اقتصادی</p></div>
-                        <div class="smal_baber_bold_txt"><p>راه اندازی رستوران</p></div>
+                        <div class="smal_baber_light_txt"><p data-i18n="economy_package">Economy Package</p></div>
+                        <div class="smal_baber_bold_txt"><p data-i18n="restaurant_setup">Restaurant Setup</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ========== slider ========== -->
+    <!-- ========== اسلایدر ========== -->
     <section class="sliders_wraper">
         <div class="slider_l reveal from-left">
             <div class="slider_link">
                 <div class="svg_link">
                     <div class="curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
                 </div>
-                <div class="txt_link"><p>مشاهده اطلاعات بیشتر</p></div>
+                <div class="txt_link"><p data-i18n="more_info">More Info</p></div>
             </div>
             <img class="slider_img_l" src="~/public/img/slider/be401fe22be8e7c8de1fd25af44a40083a5fd4db.jpg" alt="">
-            <div class="slider_r_txt"><p>پکیج اقتصادی راه اندازی رستوران</p></div>
+            <div class="slider_r_txt"><p data-i18n="economy_package_restaurant">Economy Restaurant Package</p></div>
         </div>
         <div class="slider_r reveal from-right">
             <div class="slider_link">
                 <div class="svg_link">
                     <div class="curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
                 </div>
-                <div class="txt_link"><p>مشاهده اطلاعات بیشتر</p></div>
+                <div class="txt_link"><p data-i18n="more_info">More Info</p></div>
             </div>
             <div class="slider_img_wraper">
                 <img class="slider_img_r" src="~/public/img/slider/373bf71029f1da36a550ede13341184ecb1efb8b.png" alt="">
@@ -224,38 +219,62 @@
         </div>
     </section>
 
-    <!-- ========== services ========== -->
+    <!-- ========== خدمات (داینامیک از دیتابیس) ========== -->
     <section class="services">
         <div class="service_title">
-            <h1 class="service_title_txt reveal from-left">!مجموعه خدماتی که ما ارائه میدهیم</h1>
-            <p class="service_dec reveal from-right">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-                استفاده از طراحان گرافیک است،نچنان که</p>
+            <h1 class="service_title_txt reveal from-left" data-i18n="our_services">!Our Services</h1>
+            <p class="service_dec reveal from-right" data-i18n="services_desc">Professional solutions for your
+                industrial kitchen needs.</p>
         </div>
-        <div class="service_box_wraper">
-            @for (int i = 0; i < 4; i++)
+        <div class="service_box_wraper text-center">
+            @if (Model.Services != null && Model.Services.Any())
+            {
+                foreach (var service in Model.Services)
+                {
+                    <div class="service_box group reveal from-top">
+                        <div class="hover_service_box"></div>
+                        <div class="box_title"><h3>@service.Title</h3></div>
+                        <div class="box_txt"><p>@service.Description</p></div>
+                    </div>
+                }
+            }
+            else
             {
                 <div class="service_box group reveal from-top">
                     <div class="hover_service_box"></div>
-                    <div class="box_title"><h3>نصب و راه اندازی</h3></div>
-                    <div class="box_txt"><p>خدمات پس از فروش بخش مهمی از تمام خدمات است. این مجموعه به خوبی از نیازهای
-                            پس از فروش مشتریان خود آگاه است.</p></div>
+                    <div class="box_title"><h3>Design & Consultation</h3></div>
+                    <div class="box_txt"><p>Expert layout design for your kitchen.</p></div>
+                </div>
+                <div class="service_box group reveal from-top">
+                    <div class="hover_service_box"></div>
+                    <div class="box_title"><h3>Equipment Supply</h3></div>
+                    <div class="box_txt"><p>High-quality industrial appliances.</p></div>
+                </div>
+                <div class="service_box group reveal from-top">
+                    <div class="hover_service_box"></div>
+                    <div class="box_title"><h3>Installation</h3></div>
+                    <div class="box_txt"><p>Professional setup and testing.</p></div>
+                </div>
+                <div class="service_box group reveal from-top">
+                    <div class="hover_service_box"></div>
+                    <div class="box_title"><h3>Maintenance</h3></div>
+                    <div class="box_txt"><p>24/7 after-sales support.</p></div>
                 </div>
             }
         </div>
     </section>
 
-    <!-- ========== swiper (نمونه کارها) ========== -->
     <section class="swiper_wraper">
         <div class="swiper_txt_wraper reveal from-right">
             <div class="swiper_link_wraper">
-                <a href="#" class="swiper_link reveal from-right">
+                <a href="/Home/UnderConstruction" class="swiper_link reveal from-right">
                     <img class="w-5 h-3.5" src="~/public/img/news/svgs/Vector 2343.png" alt="">
-                    <p>مشاهده همه</p>
+                    <p data-i18n="view_all">View All</p>
                 </a>
             </div>
             <div class="swiper_txt">
-                <div class="swiper_txt_bold"><p>آخرین پـــــروژه های شرکت</p></div>
-                <div class="swiper_txt_light"><p>در این بخش آخرین پروژه های امیـــــــــن کو را ببینید</p></div>
+                <div class="swiper_txt_bold"><p data-i18n="latest_projects">Latest Projects</p></div>
+                <div class="swiper_txt_light"><p data-i18n="see_projects">See the latest projects of Amin Co.</p></div>
             </div>
         </div>
         <div class="section">
@@ -266,14 +285,13 @@
                         {
                             foreach (var portfolio in Model.Portfolios)
                             {
-                                var mainImage = portfolio.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl
-                                                ?? portfolio.Images.FirstOrDefault()?.ImageUrl
-                                                ?? "~/public/img/swiper/pexels-pixabay-41953.jpg";
-                                <div class="card" data-index="0">
+                                var mainImage = portfolio.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl ?? portfolio.Images.FirstOrDefault()?.ImageUrl ?? "~/public/img/swiper/pexels-pixabay-41953.jpg";
+                                <div class="card">
                                     <img src="@mainImage" alt="@portfolio.Title">
                                     <div class="card-caption">
                                         <h3>@portfolio.Title</h3>
-                                        <a href="#">مشاهده جزئیات
+                                        <a href="/Home/UnderConstruction">
+                                            <span data-i18n="details">Details</span>
                                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                                                 <path d="M10 7H4M4 7L7 4M4 7L7 10" stroke="currentColor"
                                                       stroke-width="1.4" stroke-linecap="round"/>
@@ -306,14 +324,13 @@
                         {
                             foreach (var portfolio in Model.Portfolios)
                             {
-                                var mainImage = portfolio.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl
-                                                ?? portfolio.Images.FirstOrDefault()?.ImageUrl
-                                                ?? "~/public/img/swiper/pexels-pixabay-41953.jpg";
+                                var mainImage = portfolio.Images.FirstOrDefault(i => i.IsMain)?.ImageUrl ?? portfolio.Images.FirstOrDefault()?.ImageUrl ?? "~/public/img/swiper/pexels-pixabay-41953.jpg";
                                 <div class="mobile-card">
                                     <img src="@mainImage" alt="@portfolio.Title">
                                     <div class="mobile-caption">
                                         <h3>@portfolio.Title</h3>
-                                        <a href="#">مشاهده جزئیات
+                                        <a href="/Home/UnderConstruction">
+                                            <span data-i18n="details">Details</span>
                                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                                                 <path d="M10 7H4M4 7L7 4M4 7L7 10" stroke="currentColor"
                                                       stroke-width="1.4" stroke-linecap="round"/>
@@ -343,11 +360,10 @@
         <div class="cooperation_pattern"><img src="~/public/img/cooperation/pattern.png" alt=""></div>
     </section>
 
-    <!-- ========== about us ========== -->
+    <!-- ========== درباره ما (داینامیک) ========== -->
     <section class="aboutus">
-        <div class="amin_logo reveal from-left">
-            <img class="w-1/2 h-full object-scale-down" src="~/public/img/about_us/AMINCO.png" alt="">
-        </div>
+        <div class="amin_logo reveal from-left"><img class="w-1/2 h-full object-scale-down"
+                                                     src="~/public/img/about_us/AMINCO.png" alt="AminCo"></div>
         <div class="aboutus_more">
             <div class="aboutus_video_wraper reveal from-left">
                 <video class="about_us_video" autoplay muted loop playsinline
@@ -355,11 +371,11 @@
             </div>
             <div class="aboutus_txt">
                 <div class="texts reveal from-right">
-                    <div class="txt"><h3>درباره ما</h3></div>
-                    <div class="txt_bold"><h3>!بیشتر بدانید</h3></div>
+                    <div class="txt"><h3 data-i18n="about_us">About Us</h3></div>
+                    <div class="txt_bold"><h3 data-i18n="learn_more">!Learn More</h3></div>
                 </div>
                 <div class="txt_dec no-scrollbar reveal from-bottom">
-                    @Html.Raw(Model.AboutUs?.Content?.Replace("\n", "<br/>") ?? "متن پیش‌فرض درباره ما")
+                    @Html.Raw(Model.AboutUs?.Content?.Replace("\n", "<br/>") ?? "Default about us text")
                 </div>
                 <div class="social_pages">
                     <a href="#" class="curcle_social_page reveal from-bottom"><img class="icn"
@@ -378,64 +394,67 @@
             </div>
         </div>
     </section>
-
-    <!-- ========== cooperation ========== -->
+    
     <section class="cooperation reveal from-bottom">
         <div class="cooperation_txts">
-            <div class="cooperation_header reveal from-left"><h3>ماهمواره مفتخریم به همکاری با</h3></div>
-            <div class="cooperation_header_bold reveal from-right"><h3>صد ها شرکت معتـــــــبر</h3></div>
-            <div class="cooperation_dec reveal from-bottom"><p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
-                    چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و</p></div>
+            <div class="cooperation_header reveal from-left"><h3 data-i18n="cooperation_header">We are proud to cooperate with</h3></div>
+            <div class="cooperation_header_bold reveal from-right"><h3 data-i18n="cooperation_bold">Trusted partners across Iran</h3></div>
+            <div class="cooperation_dec reveal from-bottom"><p data-i18n="cooperation_desc">Leading companies that trust Amin Co for their kitchen equipment needs.</p></div>
         </div>
         <div class="companys">
-            <div class="company_section reveal from-left">
-                <div class="company_style_odd group">
-                    <div class="hover_company_style_odd"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_even group">
-                    <div class="hover_company_style_even"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_odd group">
-                    <div class="hover_company_style_odd"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_even group">
-                    <div class="hover_company_style_even"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_odd group">
-                    <div class="hover_company_style_odd"></div>
-                    <p class="z-10">AZARIN</p></div>
-            </div>
-            <div class="company_section reveal from-right">
-                <div class="company_style_even group">
-                    <div class="hover_company_style_even"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_odd group">
-                    <div class="hover_company_style_odd"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_even group">
-                    <div class="hover_company_style_even"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_odd group">
-                    <div class="hover_company_style_odd"></div>
-                    <p class="z-10">AZARIN</p></div>
-                <div class="company_style_even group">
-                    <div class="hover_company_style_even"></div>
-                    <p class="z-10">AZARIN</p></div>
-            </div>
+            @if (Model.Partners != null && Model.Partners.Any())
+            {
+                var partnersList = Model.Partners.ToList();
+                int half = (int)Math.Ceiling(partnersList.Count / 2.0);
+                var firstRow = partnersList.Take(half);
+                var secondRow = partnersList.Skip(half);
+
+                <div class="company_section reveal from-left text-center">
+                    @foreach (var partner in firstRow)
+                    {
+                        <div class="company_style_odd group">
+                            <div class="hover_company_style_odd"></div>
+                            <p class="z-10">@partner.Name</p>
+                        </div>
+                    }
+                </div>
+                <div class="company_section reveal from-right">
+                    @foreach (var partner in secondRow)
+                    {
+                        <div class="company_style_even group">
+                            <div class="hover_company_style_even"></div>
+                            <p class="z-10">@partner.Name</p>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <!-- fallback static content -->
+                <div class="company_section reveal from-left">
+                    <div class="company_style_odd group"><div class="hover_company_style_odd"></div><p class="z-10">AZARIN</p></div>
+                    <div class="company_style_even group"><div class="hover_company_style_even"></div><p class="z-10">GOLRANG</p></div>
+                    <div class="company_style_odd group"><div class="hover_company_style_odd"></div><p class="z-10">PERSIAN VENT</p></div>
+                </div>
+                <div class="company_section reveal from-right">
+                    <div class="company_style_even group"><div class="hover_company_style_even"></div><p class="z-10">TEHRAN STEEL</p></div>
+                    <div class="company_style_odd group"><div class="hover_company_style_odd"></div><p class="z-10">IRAN HOTELIERS</p></div>
+                </div>
+            }
         </div>
         <div class="cooperation_pattern"><img src="~/public/img/cooperation/pattern.png" alt=""></div>
         <div class="cooperation_flash"><img src="~/public/img/cooperation/Flash.png" alt=""></div>
     </section>
 
-    <!-- ========== Counseling ========== -->
+    <!-- ========== مشاوره ========== -->
     <section class="counsel">
         <div class="counsel_box reveal from-right">
             <div class="counsel_box_wraper">
-                <div class="counsoel_dec reveal from-bottom"><p>نیروهای متخصص ما راهنمای شما در توسعه کسب و کارتان
-                        خواهند بود</p></div>
+                <div class="counsoel_dec reveal from-bottom"><p data-i18n="counsel_text">Our experts will guide you in
+                        developing your business.</p></div>
                 <div class="counsel_txt_wraper reveal from-top">
-                    <div class="counsel_txt"><p>نیاز به</p></div>
-                    <div class="counsel_txt_bold"><p>مشاوره دارید؟</p></div>
+                    <div class="counsel_txt"><p data-i18n="need">Need</p></div>
+                    <div class="counsel_txt_bold"><p data-i18n="consultation">Consultation?</p></div>
                 </div>
                 <div class="xl:w-[441px] w-[150px] xl:h-[455px] h-[160px] absolute z-10 left-0"><img
                         class="object-scale-down" src="~/public/img/counsel/pattern.png" alt=""></div>
@@ -444,17 +463,13 @@
         <div class="counsel_link_wraper reveal from-left">
             <a class="counsel_link" href="#">
                 <div class="counsel_curcle"><img src="~/public/img/slider/svg/direction.png" alt=""></div>
-                <div class="counsel_link_txt"><p>با ما تماس بگیرید</p></div>
+                <div class="counsel_link_txt"><p data-i18n="contact_us">Contact Us</p></div>
             </a>
         </div>
     </section>
-
-    <!-- ========== news (آخرین اخبار و مقالات) ========== -->
-    <section class="news">
+<section class="news">
         <div class="news_txt reveal from-top">
-            <div class="news_header"><h3>آخرین اخبار و مقالات</h3></div>
-            <div class="news_dec_header_wraper"><p class="max-w-125">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                    صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و</p></div>
+            <div class="news_header"><h3 data-i18n="latest_news">Latest News & Articles</h3></div>
         </div>
         <div class="news_box_wraper">
             @if (Model.LatestArticles != null)
@@ -468,7 +483,8 @@
                                  alt="@article.Title">
                             <div class="hover_news_img"></div>
                             <div class="news_btn_hover_wraper">
-                                <a class="news_btn_hover" href="/Article/@article.Slug"><span>←</span>مطالعه مقاله</a>
+                                <a class="news_btn_hover" href="/Home/UnderConstruction"><span>←</span><span
+                                        data-i18n="read_article">Read Article</span></a>
                             </div>
                         </div>
                         <div class="news_dec">
@@ -477,57 +493,60 @@
                             <div class="person_hour">
                                 <div class="hour" dir="rtl">
                                     <img class="w-4.25 h-4.25" src="~/public/img/news/svgs/Time.png" alt="">
-                                    <p>@((DateTime.Now - article.PublishDate).Days) روز پیش</p>
+                                    <p>@((DateTime.Now - article.PublishDate).Days) <span
+                                            data-i18n="days_ago">days ago</span></p>
                                 </div>
                                 <div class="person" dir="rtl">
                                     <img class="w-4.25 h-4.25 object-scale-down" src="~/public/img/news/svgs/Mail.png"
                                          alt="">
-                                    <p>تحریریه</p>
+                                    <p data-i18n="editorial">Editorial</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
             }
-            <a href="#" class="show_all_wraper reveal from-right">
+            <a href="/Home/UnderConstruction" class="show_all_wraper reveal from-right">
                 <img class="w-5 h-3.5" src="~/public/img/news/svgs/Vector 2343.png" alt="">
-                <p>مشاهده همه</p>
+                <p data-i18n="view_all">View All</p>
             </a>
         </div>
     </section>
 
-    <!-- ========== contact us ========== -->
+    <!-- ========== فرم تماس ========== -->
     <section class="contact_us">
         <div class="cooperation_txts reveal from-top">
-            <div class="cooperation_header"><h3>برای مشاوره رایگان</h3></div>
-            <div class="cooperation_header_bold"><h3>با ما در ارتبـــــــــاط باشید</h3></div>
+            <div class="cooperation_header"><h3 data-i18n="free_consultation">Free Consultation</h3></div>
+            <div class="cooperation_header_bold"><h3 data-i18n="contact_title">Get in touch</h3></div>
             <div class="cooperation_dec reveal from-bottom">
-                <p>@(Model.ContactInfo?.Address ?? "لورم ایپسوم متن ساختگی...")</p></div>
+                <p>@(Model.ContactInfo?.Address ?? "Tehran, Valiasr St., No. 123")</p></div>
         </div>
         <form class="contact_us_form reveal from-bottom" asp-controller="Home" asp-action="SubmitContact" method="post">
             @Html.AntiForgeryToken()
-            <label class="contact_us_lable reveal from-top" for="FullName">نام و نام خانوادگی</label>
+            <label class="contact_us_lable reveal from-top" for="FullName" data-i18n="full_name">Full Name</label>
             <input class="contact_us_input reveal from-top" type="text" id="FullName" name="FullName"
-                   placeholder="فرزاد هاشمی" required>
-            <label class="contact_us_lable reveal from-top" for="PhoneNumber">شماره تماس</label>
+                   placeholder="Farzad Hashemi" required>
+            <label class="contact_us_lable reveal from-top" for="PhoneNumber" data-i18n="phone">Phone Number</label>
             <input class="contact_us_input reveal from-top" type="text" id="PhoneNumber" name="PhoneNumber"
                    placeholder="0913*******" required>
-            <label class="contact_us_lable reveal from-top" for="Description">توضیحات</label>
+            <label class="contact_us_lable reveal from-top" for="Description"
+                   data-i18n="description">Description</label>
             <input class="contact_us_input_dec reveal from-top" type="text" id="Description" name="Description">
             <div
                 class="w-full h-[60px] text-white flex justify-end items-center gap-2 xl:text-[14px] font-normal text-[12px] text-right">
-                <label class="reveal from-bottom" for="AgreePrivacy">شما با سیاست حفظ حریم خصوصی دوستانه ما موافقت
-                    می‌کنید</label>
+                <label class="reveal from-bottom" for="AgreePrivacy" data-i18n="agree_privacy">I agree to the privacy
+                    policy</label>
                 <input class="size-4" type="checkbox" id="AgreePrivacy" name="AgreePrivacy" value="true">
             </div>
-            <button class="contact_us_form_btn reveal from-bottom" type="submit">ارسال پیام</button>
+            <button class="contact_us_form_btn reveal from-bottom" type="submit" data-i18n="send_message">Send Message
+            </button>
         </form>
         <div class="top_pattern"><img src="~/public/img/contact_us/pattern/paatterntop.png" alt=""></div>
         <div class="bottom_pattern"><img src="~/public/img/contact_us/pattern/patternbottom.png" alt=""></div>
         <div class="flash_pattern"><img src="~/public/img/contact_us/flash.png" alt=""></div>
     </section>
 
-    <!-- ========== baner ========== -->
+    <!-- ========== بنر متحرک ========== -->
     <section class="baner_wraper">
         <div class="baner reveal from-left">
             <div class="scrool">
@@ -549,7 +568,7 @@
         <div class="baner_rotate reveal from-right"></div>
     </section>
 
-    <!-- ========== footer ========== -->
+    <!-- ========== فوتر ========== -->
     <footer class="footer_wraper reveal from-bottom">
         <div class="footer_items">
             <div class="footer_curcle_wraper reveal from-left">
@@ -558,17 +577,17 @@
                     <div class="text_curcle"><img src="~/public/img/footer/Group 2085663503 (1).png" alt=""></div>
                 </div>
             </div>
-            <div class="footer_header reveal from-right"><h3 data-i18n="com">@(Model.AboutUs?.Title ?? "امین کو")</h3>
+            <div class="footer_header reveal from-right"><h3 data-i18n="com">@(Model.AboutUs?.Title ?? "Amin Co")</h3>
             </div>
             <div class="footer_dec reveal from-right"><p
-                    data-i18n="f-dec">@(Model.ContactInfo?.Address ?? "آدرس شرکت")</p></div>
+                    data-i18n="f-dec">@(Model.ContactInfo?.Address ?? "Tehran, Valiasr St.")</p></div>
             <div class="footer_links reveal from-left">
-                <a class="footer_last_link" href="#">صفحه اصلی</a>
-                <a class="footer_link" href="#">صفحه اصلی</a>
-                <a class="footer_link" href="#">صفحه اصلی</a>
-                <a class="footer_first_link" href="#">صفحه اصلی</a>
+                <a class="footer_last_link" href="/"><span data-i18n="home">Home</span></a>
+                <a class="footer_link" href="/Home/UnderConstruction"><span data-i18n="services">Services</span></a>
+                <a class="footer_link" href="/Home/UnderConstruction"><span data-i18n="portfolio">Portfolio</span></a>
+                <a class="footer_first_link" href="/Home/UnderConstruction"><span data-i18n="contact">Contact</span></a>
             </div>
-            <div class="footer_txt reveal from-bottom"><p>.کلیــه حقـوق مادی و معنـوی متعلق به شرکت امین می باشد</p>
+            <div class="footer_txt reveal from-bottom"><p data-i18n="copyright">All rights reserved by Amin Co.</p>
             </div>
         </div>
     </footer>
@@ -576,7 +595,6 @@
 
 @section Scripts {
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof VanillaTilt !== 'undefined') {
                 VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {max: 5, speed: 400});

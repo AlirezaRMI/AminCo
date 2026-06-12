@@ -29,6 +29,8 @@ namespace Data.Context
         public DbSet<TicketReply> TicketReplies { get; set; }
         public DbSet<TicketAttachment> TicketAttachments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Partner> Partners { get; set; }
+        public DbSet<Service> Services { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

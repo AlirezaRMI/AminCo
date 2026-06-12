@@ -66,19 +66,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AboutUs", "Content");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Content = "متن پیش‌فرض درباره ما - بعداً ویرایش شود",
-                            CreatedAt = new DateTime(2026, 5, 13, 12, 6, 30, 265, DateTimeKind.Utc).AddTicks(3985),
-                            IsActive = false,
-                            IsDeleted = false,
-                            LastUpdated = new DateTime(2026, 5, 13, 12, 6, 30, 265, DateTimeKind.Utc).AddTicks(5456),
-                            Title = "درباره ما",
-                            UpdatedBy = 0L
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entites.Article", b =>
@@ -343,19 +330,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactInfo", "Content");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Address = "تهران، خیابان ولیعصر",
-                            CreatedAt = new DateTime(2026, 5, 13, 12, 6, 30, 323, DateTimeKind.Utc).AddTicks(6854),
-                            Email = "info@aminco.com",
-                            IsActive = false,
-                            IsDeleted = false,
-                            Phone = "021-12345678",
-                            UpdatedBy = 0L
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entites.CustomDesignRequest", b =>
@@ -744,6 +718,56 @@ namespace Data.Migrations
                     b.ToTable("OrderItems", "Sales");
                 });
 
+            modelBuilder.Entity("Domain.Entites.Partner", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DisplayOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("LogoUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Website")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Partners", "Content");
+                });
+
             modelBuilder.Entity("Domain.Entites.Portfolio", b =>
                 {
                     b.Property<long>("Id")
@@ -1023,6 +1047,57 @@ namespace Data.Migrations
                         .HasDatabaseName("IX_Sections_Name");
 
                     b.ToTable("Sections", "Commerce");
+                });
+
+            modelBuilder.Entity("Domain.Entites.Service", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("DisplayOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("IconUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services", "Content");
                 });
 
             modelBuilder.Entity("Domain.Entites.SpecialSale", b =>

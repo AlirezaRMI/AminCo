@@ -9,6 +9,8 @@ namespace Web.Controllers
         IArticleService articleService,
         IPortfolioService portfolioService,
         IAboutUsService aboutUsService,
+        IServiceService serviceService,       
+        IPartnerService partnerService,  
         IContactInfoService contactInfoService,
         ILogger<HomeController> logger)
         : Controller
@@ -20,7 +22,9 @@ namespace Web.Controllers
                 AboutUs = await aboutUsService.GetAsync(),
                 ContactInfo = await contactInfoService.GetAsync(),
                 LatestArticles = await articleService.GetAllAsync(onlyPublished: true),
-                Portfolios = await portfolioService.GetActivePortfoliosAsync()
+                Portfolios = await portfolioService.GetActivePortfoliosAsync(),
+                Services = await serviceService.GetAllActiveAsync(),
+                Partners = await partnerService.GetAllActiveAsync(),
             };
             return View(model);
         }
@@ -49,8 +53,14 @@ namespace Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
+        public IActionResult UnderConstruction()
+        {
+            return View("~/Views/Shared/UnderConstruction.cshtml");
+        }
     }
 
+  
     public class ContactFormModel
     {
         public string FullName { get; set; }

@@ -1,7 +1,9 @@
 ﻿using Application.DTOs.AboutUs;
 using Application.DTOs.Articles;
 using Application.DTOs.ContactInfo;
+using Application.DTOs.Partner;
 using Application.DTOs.Portfolios;
+using Application.DTOs.Service; 
 
 namespace Web.Models
 {
@@ -11,6 +13,8 @@ namespace Web.Models
         public ContactInfoDto ContactInfo { get; set; }
         public IReadOnlyList<ArticleDto> LatestArticles { get; set; }
         public IReadOnlyList<PortfolioDto> Portfolios { get; set; }
+        public IReadOnlyList<ServiceDto> Services { get; set; }
+        public IReadOnlyList<PartnerDto> Partners { get; set; }
         
         public int StatCustomers { get; set; } = 4000;
         public int StatProjects { get; set; } = 34500;

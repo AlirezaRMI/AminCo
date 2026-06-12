@@ -13,8 +13,10 @@ namespace Web
     {
         public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
         {
-            
             var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
+            if (jwtSettings == null || string.IsNullOrEmpty(jwtSettings.SecretKey))
+                throw new Exception("JwtSettings not configured properly");
+
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.AddAuthentication(options =>
@@ -35,7 +37,7 @@ namespace Web
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
                         ClockSkew = TimeSpan.Zero
                     };
-             
+
                     options.Events = new JwtBearerEvents
                     {
                         OnMessageReceived = context =>
@@ -44,27 +46,29 @@ namespace Web
                             if (!string.IsNullOrEmpty(token))
                                 context.Token = token;
                             return Task.CompletedTask;
+                        },
+                        OnAuthenticationFailed = context =>
+                        {
+                            Console.WriteLine("JWT Authentication Failed: " + context.Exception.Message);
+                            return Task.CompletedTask;
                         }
                     };
                 });
 
             services.AddAuthorization();
-            
+
             services.AddOpenApi("docs", options =>
             {
                 options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
             });
             services.AddEndpointsApiExplorer();
-            
-            
-            
+
             services.AddHttpContextAccessor();
             services.AddScoped<IFileUploadService, FileUploadService>();
             services.AddScoped<AdminAuthFilter>();
             services.AddScoped<IUserContextService, UserContextService>();
-            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddSingleton<IJwtService, JwtService>();
-            
+
             return services;
         }
     }

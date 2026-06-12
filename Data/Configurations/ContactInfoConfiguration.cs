@@ -12,14 +12,6 @@ namespace Data.Configurations
 
             builder.HasKey(ci => ci.Id);
 
-            builder.HasData(new ContactInfo
-            {
-                Id = 1,
-                Phone = "021-12345678",
-                Email = "info@aminco.com",
-                Address = "تهران، خیابان ولیعصر"
-            });
-
             builder.Property(ci => ci.Phone)
                 .HasMaxLength(20)
                 .IsRequired();

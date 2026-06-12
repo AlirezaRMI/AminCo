@@ -1,6 +1,4 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-@model Web.Models.LoginViewModel
+﻿@model Web.Models.LoginViewModel
 @{
     Layout = null;
     ViewData["Title"] = "ورود به پنل مدیریت";
@@ -22,103 +20,44 @@
             min-height: 100vh;
             font-family: 'Vazirmatn', Tahoma, sans-serif;
         }
-
         .login-card {
-            background: rgba(20, 20, 20, 0.85);
+            background: rgba(20,20,20,0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255,215,0,0.3);
             border-radius: 32px;
             padding: 2.5rem;
             width: 100%;
             max-width: 460px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
         }
-
-        .login-card h2 {
-            color: #f5c542;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .input-group label {
-            display: block;
-            color: #ddd;
-            margin-bottom: 0.5rem;
-        }
-
-        .input-group input {
-            width: 100%;
-            background: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 48px;
-            padding: 12px 20px;
-            color: #fff;
-        }
-
-        .input-group input:focus {
-            border-color: #f5c542;
-            outline: none;
-        }
-
-        .btn-login {
-            background: linear-gradient(135deg, #f5c542, #d4a017);
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 48px;
-            font-weight: bold;
-            color: #1a1a1a;
-            cursor: pointer;
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-        }
-
-        .validation-summary {
-            background: rgba(255, 80, 80, 0.2);
-            border: 1px solid #ff5252;
-            border-radius: 28px;
-            padding: 10px;
-            margin-bottom: 1.5rem;
-            color: #ffb3b3;
-        }
-
-        .footer-note {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #aaa;
-        }
+        .login-card h2 { color: #f5c542; text-align: center; margin-bottom: 2rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { color: #ddd; margin-bottom: 0.5rem; display: block; }
+        .input-group input { width: 100%; background: #1e1e1e; border: 1px solid #333; border-radius: 48px; padding: 12px 20px; color: #fff; }
+        .btn-login { background: linear-gradient(135deg,#f5c542,#d4a017); border: none; width: 100%; padding: 12px; border-radius: 48px; font-weight: bold; color: #1a1a1a; cursor: pointer; }
+        .validation-summary { background: rgba(255,80,80,0.2); border: 1px solid #ff5252; border-radius: 28px; padding: 10px; margin-bottom: 1.5rem; color: #ffb3b3; }
     </style>
 </head>
 <body>
 <div class="login-card">
-    <h2 class="text-center">✨ پنل مدیریت امین کو ✨</h2>
-    <form asp-controller="Authorize" asp-action="Login" method="post">
+    <h2>✨ پنل مدیریت امین کو ✨</h2>
+    <form method="post" action="/Admin/Authorize/Login">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
-        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
         <div class="input-group">
             <label>ایمیل</label>
-            <input asp-for="Email" placeholder="admin@aminco.com"/>
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Email" placeholder="admin@aminco.com" />
         </div>
         <div class="input-group">
             <label>رمز عبور</label>
-            <input asp-for="Password" type="password" placeholder="••••••••"/>
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="Password" type="password" placeholder="••••••••" />
         </div>
         <button type="submit" class="btn-login">ورود به پنل 🚀</button>
-        <div class="footer-note">فقط پرسنل مجاز دسترسی دارند</div>
+        <div class="footer-note text-center mt-3 text-muted">فقط پرسنل مجاز دسترسی دارند</div>
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

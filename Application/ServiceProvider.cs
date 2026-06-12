@@ -34,6 +34,8 @@ namespace Application
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IPartnerService, PartnerService>();
             
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             

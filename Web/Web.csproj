@@ -39,9 +39,6 @@
     
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
       <Content Include="wwwroot\public\i18next\.claude\settings.local.json" />
     </ItemGroup>
     

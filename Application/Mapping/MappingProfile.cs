@@ -10,11 +10,13 @@ using Application.DTOs.DiscountCodes;
 using Application.DTOs.Invoices;
 using Application.DTOs.OrderItems;
 using Application.DTOs.Orders;
+using Application.DTOs.Partner;
 using Application.DTOs.PortfolioImages;
 using Application.DTOs.Portfolios;
 using Application.DTOs.Products;
 using Application.DTOs.Roles;
 using Application.DTOs.Sections;
+using Application.DTOs.Service;
 using Application.DTOs.SpecialSales;
 using Application.DTOs.Users;
 using AutoMapper;
@@ -115,6 +117,11 @@ namespace Application.Mapping
             // Invoice
             CreateMap<Invoice, InvoiceDto>();
             CreateMap<CreateInvoiceDto, Invoice>();
+            
+            CreateMap<Service, ServiceDto>().ReverseMap();
+
+            // ===== جدید: Partner =====
+            CreateMap<Partner, PartnerDto>().ReverseMap();
             
             CreateMap<Role, RoleDto>();
             CreateMap<CreateRoleDto, Role>();

@@ -16,11 +16,18 @@ namespace Application.Logics.Services
     {
         public async Task<ContactInfoDto> GetAsync()
         {
-            var entity = await repo.GetSingleAsync(c => c.Id == 1 && !c.IsDeleted);
+            var entity = await repo.GetSingleAsync(c => !c.IsDeleted);
             if (entity == null)
             {
                 logger.LogWarning("ContactInfo record not found, creating default");
-                entity = new ContactInfo { Id = 1, Phone = "", Email = "", Address = "" };
+                entity = new ContactInfo
+                {
+                    Phone = "+98 21 88521436",
+                    Email = "info@amin-co.ir",
+                    Address = "No. 189, Valiasr St., Above Valiasr Square, Tehran, Iran",
+                    WorkingHours = "Saturday to Wednesday 9:00–17:00, Thursday 9:00–13:00",
+                    IsActive = true
+                };
                 await repo.AddEntity(entity);
                 await repo.SaveChangesAsync();
             }
@@ -29,7 +36,7 @@ namespace Application.Logics.Services
 
         public async Task<ContactInfoDto> UpdateAsync(UpdateContactInfoDto dto)
         {
-            var entity = await repo.GetSingleAsync(c => c.Id == 1);
+            var entity = await repo.GetSingleAsync(c => !c.IsDeleted);
             if (entity == null)
                 throw new NotFoundException("اطلاعات تماس یافت نشد.");
             mapper.Map(dto, entity);

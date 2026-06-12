@@ -12,14 +12,6 @@ namespace Data.Configurations
 
             builder.HasKey(au => au.Id);
 
-            builder.HasData(new AboutUs
-            {
-                Id = 1,
-                Title = "درباره ما",
-                Content = "متن پیش‌فرض درباره ما - بعداً ویرایش شود",
-                LastUpdated = DateTime.UtcNow
-            });
-
             builder.Property(au => au.Title)
                 .HasMaxLength(200)
                 .IsRequired();

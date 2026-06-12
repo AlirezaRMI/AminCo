@@ -5,118 +5,79 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>@ViewData["Title"] | پنل مدیریت امین کو</title>
-    <!-- Bootstrap 5 RTL + Icons -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] | پنل مدیریت</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Custom admin style -->
-    <link rel="stylesheet" href="~/admin-lte/admin-stayle.css">
-
+    <style>
+        /* استایل‌های قبلی - در صورت نیاز از جواب‌های قبلی کپی کن */
+        :root { --bg-dark: #0a0c0f; --surface-dark: #14171c; --border-dark: #2a2e35; --gold: #f5c542; }
+        body { background: var(--bg-dark); font-family: 'Vazirmatn', Tahoma, sans-serif; }
+        .admin-sidebar { position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: linear-gradient(180deg,#0f1117,#0a0c10); border-left: 1px solid var(--border-dark); z-index: 1030; overflow-y: auto; }
+        .sidebar-logo { padding: 1.5rem 1rem; text-align: center; border-bottom: 1px solid var(--border-dark); }
+        .sidebar-logo img { max-height: 50px; }
+        .sidebar-logo h4 { color: var(--gold); margin-top: 0.75rem; }
+        .nav-link-custom { display: flex; align-items: center; gap: 12px; padding: 12px 20px; margin: 4px 12px; border-radius: 12px; color: #e5e7eb; transition: 0.2s; }
+        .nav-link-custom i { width: 24px; color: #9ca3af; }
+        .nav-link-custom:hover { background: rgba(245,197,66,0.15); color: var(--gold); }
+        .nav-link-custom.active { background: rgba(245,197,66,0.2); color: var(--gold); border-right: 3px solid var(--gold); }
+        .nav-divider { font-size: 0.7rem; color: #6b7280; padding: 12px 24px 4px; }
+        .admin-main { margin-right: 280px; min-height: 100vh; background: var(--bg-dark); }
+        .admin-topbar { background: rgba(10,12,15,0.8); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-dark); padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1020; }
+        .page-title { font-size: 1.3rem; font-weight: 600; color: #f3f4f6; }
+        .logout-btn { background: rgba(245,197,66,0.15); border: 1px solid var(--gold); color: var(--gold); border-radius: 48px; padding: 6px 16px; text-decoration: none; }
+        .content-wrapper { padding: 1.8rem; }
+        @@media (max-width: 768px) { .admin-sidebar { right: -280px; } .admin-sidebar.show { right: 0; } .admin-main { margin-right: 0; } .toggle-sidebar { display: block; } }
+        .toggle-sidebar { display: none; background: transparent; border: none; color: var(--gold); font-size: 1.5rem; margin-left: 15px; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1025; }
+        .overlay.show { display: block; }
+    </style>
 </head>
 <body>
-
-<!-- سایدبار -->
-<div class="admin-sidebar" id="adminSidebar">
-    <div class="sidebar-logo">
-        <img src="~/public/img/header/AMINCO.png" alt="AminCo">
-        <h4>پنل مدیریت</h4>
-    </div>
-    <div class="nav flex-column">
-        <div class="nav-divider">داشبورد</div>
-        <a class="nav-link-custom" href="/Admin/Dashboard">
-            <i class="fas fa-tachometer-alt"></i> <span>داشبورد</span>
-        </a>
-
-        <div class="nav-divider">مدیریت محتوا</div>
-        <a class="nav-link-custom" href="/Admin/AboutUs"><i class="fas fa-info-circle"></i> درباره ما</a>
-        <a class="nav-link-custom" href="/Admin/Articles"><i class="fas fa-newspaper"></i> مقالات</a>
-        <a class="nav-link-custom" href="/Admin/Portfolios"><i class="fas fa-images"></i> نمونه کارها</a>
-        <a class="nav-link-custom" href="/Admin/PortfolioImages"><i class="fas fa-image"></i> تصاویر پروژه</a>
-        <a class="nav-link-custom" href="/Admin/CustomDesignRequests"><i class="fas fa-pen-ruler"></i> درخواست‌های سفارشی</a>
-        <a class="nav-link-custom" href="/Admin/ContactInfo"><i class="fas fa-address-card"></i> اطلاعات تماس</a>
-
-        <div class="nav-divider">فروشگاه</div>
-        <a class="nav-link-custom" href="/Admin/Sections"><i class="fas fa-layer-group"></i> بخش‌ها</a>
-        <a class="nav-link-custom" href="/Admin/Categories"><i class="fas fa-tags"></i> دسته‌بندی‌ها</a>
-        <a class="nav-link-custom" href="/Admin/Products"><i class="fas fa-box"></i> محصولات</a>
-        <a class="nav-link-custom" href="/Admin/SpecialSales"><i class="fas fa-percent"></i> فروش ویژه</a>
-        <a class="nav-link-custom" href="/Admin/DiscountCodes"><i class="fas fa-ticket-alt"></i> کدهای تخفیف</a>
-        <a class="nav-link-custom" href="/Admin/Orders"><i class="fas fa-shopping-cart"></i> سفارشات</a>
-        <a class="nav-link-custom" href="/Admin/Invoices"><i class="fas fa-file-invoice-dollar"></i> فاکتورها</a>
-
-        <div class="nav-divider">کاربران & دسترسی</div>
-        <a class="nav-link-custom" href="/Admin/Users"><i class="fas fa-users"></i> کاربران</a>
-        <a class="nav-link-custom" href="/Admin/Roles"><i class="fas fa-user-lock"></i> نقش‌ها</a>
-        <a class="nav-link-custom" href="/Admin/AdminTickets"><i class="fas fa-headset"></i> تیکت‌ها</a>
-
-        <div class="nav-divider">گزارشات</div>
-        <a class="nav-link-custom" href="/Admin/Reports"><i class="fas fa-chart-line"></i> گزارشات</a>
-
-        <hr class="my-3 mx-3" style="border-color: #2a2e35;">
-        <a class="nav-link-custom text-danger" href="/Admin/Auth/Logout">
-            <i class="fas fa-sign-out-alt"></i> <span>خروج از پنل</span>
-        </a>
-    </div>
-</div>
-
-<div class="overlay" id="sidebarOverlay"></div>
-
-<div class="admin-main">
-    <div class="admin-topbar">
-        <div class="d-flex align-items-center">
-            <button class="toggle-sidebar" id="toggleSidebarBtn"><i class="fas fa-bars"></i></button>
-            <div class="page-title">@ViewData["Title"]</div>
+    <div class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-logo">
+            <img src="~/public/img/header/AMINCO.png" alt="AminCo">
+            <h4>پنل مدیریت</h4>
         </div>
-        <div class="user-info">
-            <span><i class="fas fa-user-circle"></i> @userEmail</span>
-            <a href="/Admin/Auth/Logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</a>
+        <div class="nav flex-column">
+            <div class="nav-divider">داشبورد</div>
+            <a class="nav-link-custom" href="/Admin/Dashboard"><i class="fas fa-tachometer-alt"></i> داشبورد</a>
+            <div class="nav-divider">مدیریت محتوا</div>
+            <a class="nav-link-custom" href="/Admin/AboutUs"><i class="fas fa-info-circle"></i> درباره ما</a>
+            <a class="nav-link-custom" href="/Admin/Articles"><i class="fas fa-newspaper"></i> مقالات</a>
+            <a class="nav-link-custom" href="/Admin/Portfolios"><i class="fas fa-images"></i> نمونه کارها</a>
+            <a class="nav-link-custom" href="/Admin/ContactInfo"><i class="fas fa-address-card"></i> اطلاعات تماس</a>
+            <div class="nav-divider">فروشگاه</div>
+            <a class="nav-link-custom" href="/Admin/Categories"><i class="fas fa-tags"></i> دسته‌بندی‌ها</a>
+            <a class="nav-link-custom" href="/Admin/Products"><i class="fas fa-box"></i> محصولات</a>
+            <div class="nav-divider">کاربران</div>
+            <a class="nav-link-custom" href="/Admin/Users"><i class="fas fa-users"></i> کاربران</a>
+            <hr class="my-3 mx-3" style="border-color:#2a2e35">
+            <a class="nav-link-custom text-danger" href="/Admin/Authorize/Logout"><i class="fas fa-sign-out-alt"></i> خروج</a>
         </div>
     </div>
-    <div class="content-wrapper">
-        @RenderBody()
+    <div class="overlay" id="sidebarOverlay"></div>
+    <div class="admin-main">
+        <div class="admin-topbar">
+            <div><button class="toggle-sidebar" id="toggleSidebarBtn"><i class="fas fa-bars"></i></button>
+            <span class="page-title">@ViewData["Title"]</span></div>
+            <div><span><i class="fas fa-user-circle"></i> @userEmail</span>
+            <a href="/Admin/Authorize/Logout" class="logout-btn ms-2">خروج</a></div>
+        </div>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
     </div>
-</div>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-
-    const sidebar = document.getElementById('adminSidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const toggleBtn = document.getElementById('toggleSidebarBtn');
-
-    function closeSidebar() {
-        sidebar.classList.remove('show');
-        overlay.classList.remove('show');
-    }
-    function openSidebar() {
-        sidebar.classList.add('show');
-        overlay.classList.add('show');
-    }
-
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', function(e) {
-            if (sidebar.classList.contains('show')) closeSidebar();
-            else openSidebar();
-        });
-    }
-    overlay.addEventListener('click', closeSidebar);
-    
-    document.querySelectorAll('.nav-link-custom').forEach(link => {
-        if (link.href === window.location.href) {
-            link.classList.add('active');
-        }
-    });
-
-    
-    if (window.innerWidth < 768) {
-        document.querySelectorAll('.nav-link-custom').forEach(link => {
-            link.addEventListener('click', closeSidebar);
-        });
-    }
-</script>
-@await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const sidebar = document.getElementById('adminSidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const toggleBtn = document.getElementById('toggleSidebarBtn');
+        if(toggleBtn) toggleBtn.onclick = () => { sidebar.classList.toggle('show'); overlay.classList.toggle('show'); };
+        overlay.onclick = () => { sidebar.classList.remove('show'); overlay.classList.remove('show'); };
+        document.querySelectorAll('.nav-link-custom').forEach(link => { if(link.href === window.location.href) link.classList.add('active'); });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

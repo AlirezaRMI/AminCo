@@ -17,6 +17,9 @@ namespace Application.DTOs.Categories
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
         public long SectionId { get; set; }
+        
+        public bool IsActive { get; set; }
+
     }
 
     public class UpdateCategoryDto

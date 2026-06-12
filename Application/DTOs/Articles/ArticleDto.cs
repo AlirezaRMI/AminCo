@@ -20,6 +20,8 @@ namespace Application.DTOs.Articles
         public string Slug { get; set; } = string.Empty;
         public string ShortDescription { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
+        
+        public bool IsPublished { get; set; }
         public string? MainImageUrl { get; set; }
         public DateTime PublishDate { get; set; } = DateTime.UtcNow;
     }
