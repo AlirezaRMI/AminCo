@@ -11,7 +11,19 @@ namespace Web.Areas.Admin.Controllers
     {
         public async Task<IActionResult> Index() => View(await userService.GetAllAsync());
         public async Task<IActionResult> Details(long id) => View(await userService.GetByIdAsync(id));
-        public async Task<IActionResult> Edit(long id) => View(await userService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var user = await userService.GetByIdAsync(id);
+            var dto = new UpdateUserDto
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                IsActive = user.IsActive
+            };
+            return View(dto);
+        }
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateUserDto dto)
         {

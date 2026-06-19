@@ -19,7 +19,17 @@ namespace Web.Areas.Admin.Controllers
             await roleService.CreateAsync(dto);
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> Edit(long id) => View(await roleService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var role = await roleService.GetByIdAsync(id);
+            var dto = new UpdateRoleDto
+            {
+                Id = role.Id,
+                Name = role.Name,
+                IsActive = role.IsActive
+            };
+            return View(dto);
+        }
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateRoleDto dto)
         {

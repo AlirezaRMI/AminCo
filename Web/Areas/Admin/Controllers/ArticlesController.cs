@@ -23,7 +23,21 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(long id) => View(await articleService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var article = await articleService.GetByIdAsync(id);
+            var dto = new UpdateArticleDto
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Slug = article.Slug,
+                ShortDescription = article.ShortDescription,
+                Content = article.Content,
+                MainImageUrl = article.MainImageUrl,
+                IsPublished = article.IsPublished
+            };
+            return View(dto);
+        }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateArticleDto dto)

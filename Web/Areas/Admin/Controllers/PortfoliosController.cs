@@ -23,7 +23,24 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         
-        public async Task<IActionResult> Edit(long id) => View(await portfolioService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var portfolio = await portfolioService.GetByIdAsync(id);
+            var dto = new UpdatePortfolioDto
+            {
+                Id = portfolio.Id,
+                Title = portfolio.Title,
+                Slug = portfolio.Slug,
+                Description = portfolio.Description,
+                ClientName = portfolio.ClientName,
+                ProjectDate = portfolio.ProjectDate,
+                ProjectUrl = portfolio.ProjectUrl,
+                Category = portfolio.Category,
+                DisplayOrder = portfolio.DisplayOrder,
+                IsActive = portfolio.IsActive
+            };
+            return View(dto);
+        }
         
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdatePortfolioDto dto)

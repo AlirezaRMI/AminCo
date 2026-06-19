@@ -13,12 +13,14 @@
             <ul class="ul_header">
                 <li><a data-i18n="con-us" href="#">Contact Us</a></li>
                 <li><a data-i18n="news" href="#">News</a></li>
+                <li><a asp-controller="AboutUs" asp-action="Index" data-i18n="about_us">About Us</a></li>
                 <li class="relative" id="dropdown-parent">
-                    <a data-i18n="products" href="#" class="flex items-center gap-1" id="dropdown-btn">Products</a>
+                    <a asp-controller="Services" asp-action="Index" data-i18n="services_link"
+                       class="flex items-center gap-1" id="dropdown-btn">Products</a>
                     <ul id="dropdown-menu" class="drop_ul">
                         <li><a href="#" class="drop_li">Kitchen Equipment</a></li>
                         <li><a href="#" class="drop_li">Restaurant Equipment</a></li>
-                        <li><a href="#" class="drop_li">Installation Services</a></li>
+                        <li><a>Installation Services</a></li>
                         <li><a href="#" class="drop_li">Free Consulting</a></li>
                     </ul>
                 </li>
@@ -74,7 +76,7 @@
                         <p data-i18n="Industrial">@(Model.AboutUs?.Title ?? "Industrial Kitchen Equipment")</p>
                     </div>
                     <div class="rounded_dec">
-                        <p>@(Model.AboutUs?.Content?.Length > 150 ? Model.AboutUs.Content.Substring(0, 150) + "..." : Model.AboutUs?.Content)</p>
+                        <p data-i18n-key="about_content_short">@(Model.AboutUs?.Content?.Length > 150 ? Model.AboutUs.Content.Substring(0, 150) + "..." : Model.AboutUs?.Content)</p>
                     </div>
                     <div class="header_btn_wraper">
                         <a class="header_btn reveal from-right" href="/Home/UnderConstruction">
@@ -103,7 +105,6 @@
         </div>
     </header>
 
-    <!-- ========== هدر موبایل (همان با متن انگلیسی) ========== -->
     <header class="mobile_header">
         <div class="mobile_menu_wraper reveal from-top">
             <button class="burger_btn_wraper" id="burger-btn">
@@ -113,6 +114,7 @@
                 <ul class="mobile_ul">
                     <li><a href="#" class="mobile_li" data-i18n="con-us">Contact Us</a></li>
                     <li><a href="#" class="mobile_li" data-i18n="news">News</a></li>
+                    <li><a href="/AboutUs" class="mobile_li" data-i18n="about_us">About Us</a></li>
                     <li class="flex flex-col items-center gap-3 w-full text-center">
                         <a href="#" class="flex items-center justify-center gap-2" id="mobile-dropdown-btn">
                             <span data-i18n="products">Products & Services</span>
@@ -191,7 +193,6 @@
         </div>
     </header>
 
-    <!-- ========== اسلایدر ========== -->
     <section class="sliders_wraper">
         <div class="slider_l reveal from-left">
             <div class="slider_link">
@@ -219,7 +220,6 @@
         </div>
     </section>
 
-    <!-- ========== خدمات (داینامیک از دیتابیس) ========== -->
     <section class="services">
         <div class="service_title">
             <h1 class="service_title_txt reveal from-left" data-i18n="our_services">!Our Services</h1>
@@ -233,8 +233,12 @@
                 {
                     <div class="service_box group reveal from-top">
                         <div class="hover_service_box"></div>
-                        <div class="box_title"><h3>@service.Title</h3></div>
-                        <div class="box_txt"><p>@service.Description</p></div>
+                        <div class="box_title">
+                            <h3 data-i18n-key="service_title_@service.Id">@service.Title</h3>
+                        </div>
+                        <div class="box_txt">
+                            <p data-i18n-key="service_desc_@service.Id">@service.Description</p>
+                        </div>
                     </div>
                 }
             }
@@ -242,22 +246,23 @@
             {
                 <div class="service_box group reveal from-top">
                     <div class="hover_service_box"></div>
-                    <div class="box_title"><h3>Design & Consultation</h3></div>
-                    <div class="box_txt"><p>Expert layout design for your kitchen.</p></div>
+                    <div class="box_title"><h3 data-i18n="installation">Installation & Setup</h3></div>
+                    <div class="box_txt"><p data-i18n="service_text">After-sales service is a crucial part of all
+                            services. We are aware of our customers' needs.</p></div>
                 </div>
                 <div class="service_box group reveal from-top">
                     <div class="hover_service_box"></div>
-                    <div class="box_title"><h3>Equipment Supply</h3></div>
+                    <div class="box_title"><h3 data-i18n="equipment_supply">Equipment Supply</h3></div>
                     <div class="box_txt"><p>High-quality industrial appliances.</p></div>
                 </div>
                 <div class="service_box group reveal from-top">
                     <div class="hover_service_box"></div>
-                    <div class="box_title"><h3>Installation</h3></div>
-                    <div class="box_txt"><p>Professional setup and testing.</p></div>
+                    <div class="box_title"><h3 data-i18n="consultation">Consultation</h3></div>
+                    <div class="box_txt"><p>Expert layout design for your kitchen.</p></div>
                 </div>
                 <div class="service_box group reveal from-top">
                     <div class="hover_service_box"></div>
-                    <div class="box_title"><h3>Maintenance</h3></div>
+                    <div class="box_title"><h3 data-i18n="maintenance">Maintenance</h3></div>
                     <div class="box_txt"><p>24/7 after-sales support.</p></div>
                 </div>
             }
@@ -289,7 +294,7 @@
                                 <div class="card">
                                     <img src="@mainImage" alt="@portfolio.Title">
                                     <div class="card-caption">
-                                        <h3>@portfolio.Title</h3>
+                                        <h3 data-i18n-key="portfolio_title_@portfolio.Id">@portfolio.Title</h3>
                                         <a href="/Home/UnderConstruction">
                                             <span data-i18n="details">Details</span>
                                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
@@ -328,7 +333,7 @@
                                 <div class="mobile-card">
                                     <img src="@mainImage" alt="@portfolio.Title">
                                     <div class="mobile-caption">
-                                        <h3>@portfolio.Title</h3>
+                                        <h3 data-i18n-key="portfolio_title_@portfolio.Id">@portfolio.Title</h3>
                                         <a href="/Home/UnderConstruction">
                                             <span data-i18n="details">Details</span>
                                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
@@ -360,7 +365,6 @@
         <div class="cooperation_pattern"><img src="~/public/img/cooperation/pattern.png" alt=""></div>
     </section>
 
-    <!-- ========== درباره ما (داینامیک) ========== -->
     <section class="aboutus">
         <div class="amin_logo reveal from-left"><img class="w-1/2 h-full object-scale-down"
                                                      src="~/public/img/about_us/AMINCO.png" alt="AminCo"></div>
@@ -375,7 +379,8 @@
                     <div class="txt_bold"><h3 data-i18n="learn_more">!Learn More</h3></div>
                 </div>
                 <div class="txt_dec no-scrollbar reveal from-bottom">
-                    @Html.Raw(Model.AboutUs?.Content?.Replace("\n", "<br/>") ?? "Default about us text")
+                    <div
+                        data-i18n-key="about_content">@Html.Raw(Model.AboutUs?.Content?.Replace("\n", "<br/>") ?? "Default about us text")</div>
                 </div>
                 <div class="social_pages">
                     <a href="#" class="curcle_social_page reveal from-bottom"><img class="icn"
@@ -394,27 +399,29 @@
             </div>
         </div>
     </section>
-    
+
     <section class="cooperation reveal from-bottom">
         <div class="cooperation_txts">
-            <div class="cooperation_header reveal from-left"><h3 data-i18n="cooperation_header">We are proud to cooperate with</h3></div>
-            <div class="cooperation_header_bold reveal from-right"><h3 data-i18n="cooperation_bold">Trusted partners across Iran</h3></div>
-            <div class="cooperation_dec reveal from-bottom"><p data-i18n="cooperation_desc">Leading companies that trust Amin Co for their kitchen equipment needs.</p></div>
+            <div class="cooperation_header reveal from-left"><h3 data-i18n="cooperation_header">We are proud to
+                    cooperate with</h3></div>
+            <div class="cooperation_header_bold reveal from-right"><h3 data-i18n="cooperation_bold">Trusted partners
+                    across Iran</h3></div>
+            <div class="cooperation_dec reveal from-bottom"><p data-i18n="cooperation_desc">Leading companies that trust
+                    Amin Co for their kitchen equipment needs.</p></div>
         </div>
         <div class="companys">
             @if (Model.Partners != null && Model.Partners.Any())
             {
                 var partnersList = Model.Partners.ToList();
-                int half = (int)Math.Ceiling(partnersList.Count / 2.0);
+                int half = (int) Math.Ceiling(partnersList.Count / 2.0);
                 var firstRow = partnersList.Take(half);
                 var secondRow = partnersList.Skip(half);
-
                 <div class="company_section reveal from-left text-center">
                     @foreach (var partner in firstRow)
                     {
                         <div class="company_style_odd group">
                             <div class="hover_company_style_odd"></div>
-                            <p class="z-10">@partner.Name</p>
+                            <p class="z-10" data-i18n-key="partner_name_@partner.Id">@partner.Name</p>
                         </div>
                     }
                 </div>
@@ -423,22 +430,31 @@
                     {
                         <div class="company_style_even group">
                             <div class="hover_company_style_even"></div>
-                            <p class="z-10">@partner.Name</p>
+                            <p class="z-10" data-i18n-key="partner_name_@partner.Id">@partner.Name</p>
                         </div>
                     }
                 </div>
             }
             else
             {
-                <!-- fallback static content -->
                 <div class="company_section reveal from-left">
-                    <div class="company_style_odd group"><div class="hover_company_style_odd"></div><p class="z-10">AZARIN</p></div>
-                    <div class="company_style_even group"><div class="hover_company_style_even"></div><p class="z-10">GOLRANG</p></div>
-                    <div class="company_style_odd group"><div class="hover_company_style_odd"></div><p class="z-10">PERSIAN VENT</p></div>
+                    <div class="company_style_odd group">
+                        <div class="hover_company_style_odd"></div>
+                        <p class="z-10" data-i18n="azarin">AZARIN</p></div>
+                    <div class="company_style_even group">
+                        <div class="hover_company_style_even"></div>
+                        <p class="z-10" data-i18n="golrang">GOLRANG</p></div>
+                    <div class="company_style_odd group">
+                        <div class="hover_company_style_odd"></div>
+                        <p class="z-10" data-i18n="persian_vent">PERSIAN VENT</p></div>
                 </div>
                 <div class="company_section reveal from-right">
-                    <div class="company_style_even group"><div class="hover_company_style_even"></div><p class="z-10">TEHRAN STEEL</p></div>
-                    <div class="company_style_odd group"><div class="hover_company_style_odd"></div><p class="z-10">IRAN HOTELIERS</p></div>
+                    <div class="company_style_even group">
+                        <div class="hover_company_style_even"></div>
+                        <p class="z-10" data-i18n="tehran_steel">TEHRAN STEEL</p></div>
+                    <div class="company_style_odd group">
+                        <div class="hover_company_style_odd"></div>
+                        <p class="z-10" data-i18n="iran_hoteliers">IRAN HOTELIERS</p></div>
                 </div>
             }
         </div>
@@ -446,7 +462,6 @@
         <div class="cooperation_flash"><img src="~/public/img/cooperation/Flash.png" alt=""></div>
     </section>
 
-    <!-- ========== مشاوره ========== -->
     <section class="counsel">
         <div class="counsel_box reveal from-right">
             <div class="counsel_box_wraper">
@@ -467,7 +482,8 @@
             </a>
         </div>
     </section>
-<section class="news">
+
+    <section class="news">
         <div class="news_txt reveal from-top">
             <div class="news_header"><h3 data-i18n="latest_news">Latest News & Articles</h3></div>
         </div>
@@ -488,8 +504,10 @@
                             </div>
                         </div>
                         <div class="news_dec">
-                            <div class="news_dec_header"><h3>@article.Title</h3></div>
-                            <div class="news_dec_txt no-scrollbar"><p>@article.ShortDescription</p></div>
+                            <div class="news_dec_header"><h3
+                                    data-i18n-key="article_title_@article.Id">@article.Title</h3></div>
+                            <div class="news_dec_txt no-scrollbar"><p
+                                    data-i18n-key="article_desc_@article.Id">@article.ShortDescription</p></div>
                             <div class="person_hour">
                                 <div class="hour" dir="rtl">
                                     <img class="w-4.25 h-4.25" src="~/public/img/news/svgs/Time.png" alt="">
@@ -513,40 +531,122 @@
         </div>
     </section>
 
-    <!-- ========== فرم تماس ========== -->
     <section class="contact_us">
         <div class="cooperation_txts reveal from-top">
             <div class="cooperation_header"><h3 data-i18n="free_consultation">Free Consultation</h3></div>
             <div class="cooperation_header_bold"><h3 data-i18n="contact_title">Get in touch</h3></div>
             <div class="cooperation_dec reveal from-bottom">
-                <p>@(Model.ContactInfo?.Address ?? "Tehran, Valiasr St., No. 123")</p></div>
+                <p data-i18n-key="contact_address">@(Model.ContactInfo?.Address ?? "Tehran, Valiasr St., No. 123")</p>
+            </div>
         </div>
-        <form class="contact_us_form reveal from-bottom" asp-controller="Home" asp-action="SubmitContact" method="post">
-            @Html.AntiForgeryToken()
+
+        <form id="contactForm" class="contact_us_form reveal from-bottom">
+            @Html.AntiForgeryToken() <!-- فقط برای نمایش، اما کنترلر آن را نادیده می‌گیرد -->
             <label class="contact_us_lable reveal from-top" for="FullName" data-i18n="full_name">Full Name</label>
             <input class="contact_us_input reveal from-top" type="text" id="FullName" name="FullName"
                    placeholder="Farzad Hashemi" required>
+
             <label class="contact_us_lable reveal from-top" for="PhoneNumber" data-i18n="phone">Phone Number</label>
             <input class="contact_us_input reveal from-top" type="text" id="PhoneNumber" name="PhoneNumber"
-                   placeholder="0913*******" required>
+                   placeholder="0912*******" required>
+
             <label class="contact_us_lable reveal from-top" for="Description"
                    data-i18n="description">Description</label>
             <input class="contact_us_input_dec reveal from-top" type="text" id="Description" name="Description">
+
             <div
                 class="w-full h-[60px] text-white flex justify-end items-center gap-2 xl:text-[14px] font-normal text-[12px] text-right">
                 <label class="reveal from-bottom" for="AgreePrivacy" data-i18n="agree_privacy">I agree to the privacy
                     policy</label>
                 <input class="size-4" type="checkbox" id="AgreePrivacy" name="AgreePrivacy" value="true">
             </div>
+
             <button class="contact_us_form_btn reveal from-bottom" type="submit" data-i18n="send_message">Send Message
             </button>
         </form>
+
+        <!-- الگوهای تصویری -->
         <div class="top_pattern"><img src="~/public/img/contact_us/pattern/paatterntop.png" alt=""></div>
         <div class="bottom_pattern"><img src="~/public/img/contact_us/pattern/patternbottom.png" alt=""></div>
         <div class="flash_pattern"><img src="~/public/img/contact_us/flash.png" alt=""></div>
     </section>
 
-    <!-- ========== بنر متحرک ========== -->
+    <div id="contactModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <div class="contact-modal-icon" id="modalIcon">✅</div>
+            <h3 id="modalTitle">موفق</h3>
+            <p id="modalMessage">پیام شما با موفقیت ارسال شد.</p>
+            <button class="contact-modal-btn" id="modalCloseBtn">باشه</button>
+        </div>
+    </div>
+
+    <style>
+        .contact-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+        .contact-modal-content {
+            background: #1a1a1a;
+            border: 1px solid rgba(181, 77, 96, 0.3);
+            border-radius: 32px;
+            padding: 2.5rem 2rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: slideUp 0.4s ease;
+        }
+        .contact-modal-icon {
+            font-size: 48px;
+            margin-bottom: 0.5rem;
+        }
+        .contact-modal-content h3 {
+            color: #B54D60;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .contact-modal-content p {
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .contact-modal-btn {
+            background: linear-gradient(135deg, #710D20, #B54D60);
+            border: none;
+            padding: 10px 30px;
+            border-radius: 48px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 16px;
+        }
+        .contact-modal-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(113, 13, 32, 0.4);
+        }
+        @@keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @@keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+
     <section class="baner_wraper">
         <div class="baner reveal from-left">
             <div class="scrool">
@@ -568,7 +668,6 @@
         <div class="baner_rotate reveal from-right"></div>
     </section>
 
-    <!-- ========== فوتر ========== -->
     <footer class="footer_wraper reveal from-bottom">
         <div class="footer_items">
             <div class="footer_curcle_wraper reveal from-left">
@@ -577,13 +676,17 @@
                     <div class="text_curcle"><img src="~/public/img/footer/Group 2085663503 (1).png" alt=""></div>
                 </div>
             </div>
-            <div class="footer_header reveal from-right"><h3 data-i18n="com">@(Model.AboutUs?.Title ?? "Amin Co")</h3>
+            <div class="footer_header reveal from-right">
+                <h3 data-i18n-key="footer_company_name">@(Model.AboutUs?.Title ?? "Amin Co")</h3>
             </div>
-            <div class="footer_dec reveal from-right"><p
-                    data-i18n="f-dec">@(Model.ContactInfo?.Address ?? "Tehran, Valiasr St.")</p></div>
+            <div class="footer_dec reveal from-right">
+                <p data-i18n-key="footer_address">@(Model.ContactInfo?.Address ?? "Tehran, Valiasr St.")</p>
+            </div>
             <div class="footer_links reveal from-left">
                 <a class="footer_last_link" href="/"><span data-i18n="home">Home</span></a>
-                <a class="footer_link" href="/Home/UnderConstruction"><span data-i18n="services">Services</span></a>
+                <a class="footer_link" href="/AboutUs" data-i18n="about_us"><span data-i18n="about_us">About Us</span></a>
+                <a class="footer_link" asp-controller="Services" asp-action="Index" data-i18n="services_link"><span
+                        data-i18n="services">Services</span></a>
                 <a class="footer_link" href="/Home/UnderConstruction"><span data-i18n="portfolio">Portfolio</span></a>
                 <a class="footer_first_link" href="/Home/UnderConstruction"><span data-i18n="contact">Contact</span></a>
             </div>
@@ -596,9 +699,97 @@
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // VanillaTilt
             if (typeof VanillaTilt !== 'undefined') {
-                VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {max: 5, speed: 400});
+                VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 5, speed: 400 });
             }
+
+            const form = document.getElementById('contactForm');
+            const modal = document.getElementById('contactModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalIcon = document.getElementById('modalIcon');
+            const closeBtn = document.getElementById('modalCloseBtn');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                // اعتبارسنجی ساده کلاینت
+                if (!data.FullName || !data.PhoneNumber) {
+                    showModal('❌', 'خطا', 'لطفاً نام و شماره تماس را وارد کنید.');
+                    return;
+                }
+
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.innerText;
+                btn.innerText = '⏳ در حال ارسال...';
+                btn.disabled = true;
+
+                fetch('/api/contact/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        FullName: data.FullName,
+                        PhoneNumber: data.PhoneNumber,
+                        Description: data.Description || '',
+                        AgreePrivacy: data.AgreePrivacy === 'on'
+                    }).toString()
+                })
+                    .then(response => {
+                        // لاگ کردن وضعیت پاسخ
+                        console.log('Response status:', response.status);
+                        if (response.status === 401) {
+                            window.location.href = '/Account/Login?returnUrl=' + encodeURIComponent(window.location.pathname);
+                            return Promise.reject('redirect');
+                        }
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                console.error('Server error response:', text);
+                                throw new Error('خطای سرور: ' + response.status);
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        if (result.success) {
+                            showModal('✅', 'موفق', result.message);
+                            form.reset();
+                        } else {
+                            showModal('❌', 'خطا', result.message);
+                        }
+})
+                    .catch(error => {
+                        if (error === 'redirect') return;
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        showModal('❌', 'خطا', error.message || 'مشکل در ارتباط با سرور.');
+                        console.error('Fetch error:', error);
+                    });
+            });
+
+            function showModal(icon, title, message) {
+                modalIcon.innerText = icon;
+                modalTitle.innerText = title;
+                modalMessage.innerText = message;
+                modal.style.display = 'flex';
+            }
+
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
     </script>
 }

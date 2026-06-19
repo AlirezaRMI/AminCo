@@ -3,6 +3,7 @@ using Web.Models;
 using Application.Logics.Intefaces;
 using System.Diagnostics;
 
+
 namespace Web.Controllers
 {
     public class HomeController(
@@ -28,21 +29,7 @@ namespace Web.Controllers
             };
             return View(model);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitContact(ContactFormModel form)
-        {
-            if (!ModelState.IsValid)
-            {
-                TempData["ContactError"] = "لطفا اطلاعات را صحیح وارد کنید.";
-                return RedirectToAction(nameof(Index));
-            }
-            
-            logger.LogInformation("Contact from {Name} - {Email}", form.FullName, form.Email);
-            TempData["ContactSuccess"] = "پیام شما با موفقیت دریافت شد.";
-            return RedirectToAction(nameof(Index));
-        }
-
+        
         public IActionResult Privacy()
         {
             return View();
@@ -58,15 +45,5 @@ namespace Web.Controllers
         {
             return View("~/Views/Shared/UnderConstruction.cshtml");
         }
-    }
-
-  
-    public class ContactFormModel
-    {
-        public string FullName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Description { get; set; }
-        public bool AgreePrivacy { get; set; }
-        public string Email { get; set; }
     }
 }

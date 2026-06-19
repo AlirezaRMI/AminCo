@@ -21,7 +21,22 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(long id) => View(await discountService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var code = await discountService.GetByIdAsync(id);
+            var dto = new UpdateDiscountCodeDto
+            {
+                Id = code.Id,
+                Code = code.Code,
+                Type = code.Type,
+                Value = code.Value,
+                StartDate = code.StartDate,
+                EndDate = code.EndDate,
+                UsageLimit = code.UsageLimit,
+                IsActive = code.IsActive
+            };
+            return View(dto);
+        }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateDiscountCodeDto dto)

@@ -1,0 +1,182 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Login | Amin Co";
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/public/css/main.css">
+    <link rel="stylesheet" href="~/public/css/setting.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 10%, #0a0a0a, #030303);
+            padding: 20px;
+        }
+        .auth-card {
+            background: rgba(20,20,20,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(181, 77, 96, 0.3);
+            border-radius: 40px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+        }
+        .auth-card .auth-logo-text {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            font-size: 35px;
+            font-weight: 700;
+            color: #c0c0c0; /* رنگ استیلی/نقره‌ای */
+            letter-spacing: 1px;
+        }
+        .auth-card .auth-logo-text span {
+            color: #B54D60;
+        }
+        .auth-card h2 {
+            color: #B54D60;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+        }
+        .auth-card .input-group {
+            margin-bottom: 1.2rem;
+        }
+        .auth-card .input-group label {
+            display: block;
+            color: #ddd;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .auth-card .input-group input {
+            width: 100%;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 48px;
+            padding: 12px 20px;
+            color: #fff;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+        .auth-card .input-group input:focus {
+            border-color: #B54D60;
+            outline: none;
+            box-shadow: 0 0 12px rgba(181, 77, 96, 0.2);
+        }
+        .auth-card .input-group .form-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .auth-card .input-group .form-check input {
+            width: auto;
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+        .auth-card .input-group .form-check label {
+            color: #bbb;
+            font-size: 14px;
+            margin: 0;
+        }
+        .auth-card .btn-auth {
+            width: 100%;
+            padding: 12px;
+            border-radius: 48px;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(135deg, #710D20, #B54D60);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .auth-card .btn-auth:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(113, 13, 32, 0.4);
+        }
+        .auth-card .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #aaa;
+            font-size: 14px;
+        }
+        .auth-card .auth-footer a {
+            color: #B54D60;
+            text-decoration: none;
+        }
+        .auth-card .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        .auth-card .validation-summary {
+            background: rgba(255,80,80,0.15);
+            border: 1px solid #ff5252;
+            border-radius: 28px;
+            padding: 10px 16px;
+            margin-bottom: 1.2rem;
+            color: #ffb3b3;
+            font-size: 13px;
+        }
+        .auth-card .text-danger {
+            color: #ff6b6b;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="auth-page">
+
+<div class="auth-card">
+
+    <!-- ====== لوگو با تکست ====== -->
+    <div class="auth-logo-text">
+        AMIN CO
+    </div>
+
+    <h2>Welcome Back</h2>
+
+    <form method="post" asp-action="Login">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+        <div class="input-group">
+            <label>Email</label>
+            <input asp-for="Email" placeholder="admin@aminco.com" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input asp-for="Password" type="password" placeholder="••••••••" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="input-group">
+            <div class="form-check">
+                <input asp-for="Remmeberme" />
+                <label>Remember me</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-auth">Login</button>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="/Account/Register">Sign up</a>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

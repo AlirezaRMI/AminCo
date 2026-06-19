@@ -23,9 +23,22 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(long id) => View(await categoryService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var category = await categoryService.GetByIdAsync(id);
+            var updateDto = new UpdateCategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                ImageUrl = category.ImageUrl,
+                SectionId = category.SectionId,
+                IsActive = category.IsActive
+            };
+            return View(updateDto);
+        }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Edit(UpdateCategoryDto dto)
         {
             if (!ModelState.IsValid) return View(dto);

@@ -21,7 +21,20 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(long id) => View(await sectionService.GetByIdAsync(id));
+        public async Task<IActionResult> Edit(long id)
+        {
+            var section = await sectionService.GetByIdAsync(id);
+            var dto = new UpdateSectionDto
+            {
+                Id = section.Id,
+                Name = section.Name,
+                Description = section.Description,
+                Icon = section.Icon,
+                DisplayOrder = section.DisplayOrder,
+                IsActive = section.IsActive
+            };
+            return View(dto);
+        }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateSectionDto dto)

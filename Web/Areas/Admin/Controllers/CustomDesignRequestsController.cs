@@ -15,8 +15,14 @@ namespace Web.Areas.Admin.Controllers
         
         public async Task<IActionResult> Edit(long id)
         {
-            var dto = await requestService.GetByIdAsync(id);
-            return View(dto);
+            var request = await requestService.GetByIdAsync(id);
+            var updateDto = new UpdateCustomDesignRequestDto
+            {
+                Id = request.Id,
+                Status = request.Status,
+                AdminResponse = request.AdminResponse
+            };
+            return View(updateDto);
         }
         
         [HttpPost, ValidateAntiForgeryToken]
