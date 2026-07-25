@@ -1,0 +1,131 @@
+
+{
+  "nav": {
+    "home": "Home",
+    "services": "Products & Services",
+    "blog": "News & Articles",
+    "contact": "Contact Us"
+  },
+
+    "hero": {
+    "productCards": {
+      "card1": {
+        "title": "Economic Package",
+        "subtitle": "Restaurant Setup"
+      },
+      "card2": {
+        "title": "Economic Package",
+        "subtitle": "Restaurant Setup"
+      }
+    },
+
+       "titleNormal": "Design and Manufacturing of All Types of",
+    "titleBold": "Industrial Kitchen Equipment",
+        "subtitle": "Default text default text default text default text default text default text",
+
+    "cta": "View Services",
+    "stats": {
+      "stat1": { "value": "1921462", "label": "Default text" },
+      "stat2": { "value": "12021", "label": "Default text" },
+      "stat3": { "value": "577324", "label": "Default text" }
+    },
+    "package": {
+      "title": "Restaurant Setup Economic Package",
+      "cta": "View More Details"
+    },
+    "projects": {
+      "title": "View Latest Projects"
+    }
+  },
+
+    "bottomCards": {
+    "package": {
+      "title": "Restaurant Setup Economic Package",
+      "cta": "View More Info"
+    },
+    "projects": {
+      "cta": "View Latest Projects"
+    }
+  },
+
+   "services": {
+    "title": "Our Services",
+    "subtitle": "Default text default text default text default text default text",
+    "cards": [
+      { "title": "After-Sales Services", "text": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." },
+      { "title": "After-Sales Services", "text": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." },
+      { "title": "Installation & Setup", "text": "Default text default text default text default text default text default text default text" },
+      { "title": "After-Sales Services", "text": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." }
+    ]
+  },
+
+    "projects": {
+    "title": "Latest Company Projects",
+    "subtitle": "Check out AminCo's latest projects in this section",
+    "viewAll": "View All",
+    "viewDetails": "View Details",
+    "items": [
+      { "title": "Default text default text" },
+      { "title": "Default text default text" },
+      { "title": "65L Vacuum-Sealed Marinator Producer" },
+      { "title": "Default text default text" },
+      { "title": "Default text default text" }
+    ]
+  },
+
+    "about": {
+      "titleBold": "Learn More!",
+    "titleNormal": "About Us",
+    
+    "subtitle": "Default text default text default text default text default text"
+  },
+
+    "partners": {
+    "titleNormal": "We're always proud to collaborate with",
+    "titleBold": "hundreds of trusted companies",
+    "subtitle": "Default text default text default text default text default text"
+  },
+
+    "consultBanner": {
+    "titleNormal": "Need",
+    "titleBold": "Consultation?",
+    "subtitle": "Our expert team will guide you in growing your business",
+    "cta": "Contact Us"
+  },
+
+    "news": {
+      "viewAll": "View All",
+    "title": "Latest News & Articles",
+    "subtitle": "Default text default text default text default text default text",
+    "readMore": "Read Article",
+    "items": [
+      { "title": "Default title text default title", "text": "Default subtitle text default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title", "text": "Default subtitle text default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title", "text": "Default subtitle text default subtitle", "author": "Author Name", "time": "7 hours ago" }
+    ]
+  },
+
+    "consultation": {
+    "titleBefore": "For a Free Consultation",
+    "titleEmphasis": "Get in Touch With Us",
+    "fields": {
+      "name": { "label": "Full Name", "placeholder": "Enter your name" },
+      "phone": { "label": "Phone Number", "placeholder": "1234567890" },
+      "message": { "label": "Your Message", "placeholder": "Default text default text" }
+    },
+    "privacyText": "By submitting, you agree to our friendly privacy policy.",
+    "submit": "Send Message"
+  },
+  "footer": {
+    "companyName": "Amin Company",
+    "description": "Default text default text default text default text default text",
+    "links": {
+      "home": "Home",
+      "services": "Products & Services",
+      "blog": "News & Articles",
+      "contact": "Contact Us"
+    },
+    "copyright": "All material and intellectual rights reserved to Amin Company."
+  }
+
+}
