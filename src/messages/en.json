@@ -126,6 +126,26 @@
       "contact": "Contact Us"
     },
     "copyright": "All material and intellectual rights reserved to Amin Company."
+  },
+
+   "aboutHero": {
+    "title": "Learn More About Us",
+    "subtitle": "Default text default text default text default text default text"
+  },
+
+    "aboutIntro": {
+    "emphasis1": "Decades of experience",
+    "middle": " in manufacturing industrial kitchen equipment using ",
+    "emphasis2": "cutting-edge technology and high quality"
+  },
+
+  "timeline": {
+    "items": [
+      { "title": "Company Founded", "description": "Default text default text default text default text" },
+      { "title": "Company Founded", "description": "Default text default text default text default text" },
+      { "title": "Company Founded", "description": "Default text default text default text default text" },
+      { "title": "Company Founded", "description": "Default text default text default text default text" }
+    ]
   }
 
 }
