@@ -19,7 +19,7 @@ const navLinks: NavLink[] = [
     ],
   },
   { key: "blog", href: "/blog" },
-  { key: "contact", href: "/contact" },
+  { key: "contact", href: "/about" }, // موقتاً به about وصل شد، بعداً برگردون به /contact
 ];
 
 export default function Navbar({ overlay = false }: { overlay?: boolean }) {

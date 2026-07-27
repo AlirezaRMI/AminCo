@@ -146,6 +146,24 @@
       { "title": "Company Founded", "description": "Default text default text default text default text" },
       { "title": "Company Founded", "description": "Default text default text default text default text" }
     ]
+  },
+
+    "contactCard": {
+    "titleBefore": "Get in",
+    "titleEmphasis": "Touch With Us",
+    "phoneLabel": "Phone Number",
+    "emailLabel": "Email Address",
+    "addressLabel": "Address",
+    "socialText": "Follow us on social media.",
+    "phones": ["+9821 55550777", "+9821 55550777"],
+    "email": "Info@Amin.co",
+    "address": "Tehran, Default Address"
+  },
+
+    "mapSection": {
+    "title": "View Our Location",
+    "viewButton": "View On Google Map",
+    "mapTitle": "Our location on the map"
   }
 
 }

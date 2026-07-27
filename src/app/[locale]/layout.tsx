@@ -45,10 +45,10 @@ export default async function LocaleLayout({
   const fontVariable = locale === "fa" ? "font-yekan-bakh" : "font-inter";
 
   return (
-    <html lang={locale} dir={dir}>
-      <body
-        className={`${yekanBakh.variable} ${inter.variable} ${fontVariable} bg-background text-white antialiased`}
-      >
+  <html lang={locale} dir={dir} className="overflow-x-hidden">
+  <body
+    className={`${yekanBakh.variable} ${inter.variable} ${fontVariable} bg-background text-white antialiased overflow-x-hidden`}
+  >
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
