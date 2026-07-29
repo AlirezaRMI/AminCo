@@ -164,6 +164,20 @@
     "title": "View Our Location",
     "viewButton": "View On Google Map",
     "mapTitle": "Our location on the map"
+  },
+
+    "servicesHero": {
+    "title": "Our Complete Range of Services!",
+    "subtitle": "Default text default text default text default text default text"
+  },
+
+    "servicesTimeline": {
+    "items": [
+      { "description": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." },
+      { "description": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." },
+      { "description": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." },
+      { "description": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." }
+    ]
   }
 
 }

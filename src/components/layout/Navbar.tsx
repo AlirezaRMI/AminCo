@@ -14,8 +14,8 @@ const navLinks: NavLink[] = [
     key: "services",
     href: "/services",
     submenu: [
-      { key: "services", href: "/services/1" },
-      { key: "services", href: "/services/2" },
+      { key: "services", href: "/services" },
+      { key: "services", href: "/services" },
     ],
   },
   { key: "blog", href: "/blog" },

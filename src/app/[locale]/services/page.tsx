@@ -1,15 +1,17 @@
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer"
+import ServicesHero from "@/components/sections/services/Hero";
+import Services from "@/components/sections/services/Services";
+import ServicesTimeline from "@/components/sections/services/ServicesTimeline";
 
-export default function Page() {
+export default function ServicesPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-white px-6">
-      <div className="text-center max-w-md">
-        <h1 className="text-3xl font-semibold text-gray-900">
-          این صفحه در حال توسعه است
-        </h1>
-        <p className="mt-4 text-gray-600 leading-7">
-          به‌زودی محتوای این بخش اضافه می‌شود. 
-        </p>
-      </div>
+    <main className="min-h-screen">
+      <Navbar overlay />
+      <ServicesHero />
+      <Services />
+      <ServicesTimeline />
+      <Footer />
     </main>
   );
 }
