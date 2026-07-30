@@ -195,6 +195,32 @@
     "title": "Marinator Project",
     "subtitle": "Default text default text default text default text default text",
     "itemTitle": "65L Vacuum-Sealed Marinator Producer"
+  },
+
+   "blogHero": {
+    "category": "Category Name",
+    "readMore": "Read More",
+    "slides": [
+      { "title": "Default blog title default blog", "subtitle": "Default blog subtitle default blog subtitle default blog subtitle" },
+      { "title": "Default blog title default blog", "subtitle": "Default blog subtitle default blog subtitle" },
+      { "title": "Default blog title default blog", "subtitle": "Default blog subtitle default blog subtitle" },
+      { "title": "Default blog title default blog", "subtitle": "Default blog subtitle default blog subtitle" }
+    ]
+  },
+
+    "latestArticles": {
+    "title": "Latest Blog Posts",
+    "sortLabel": "Sort by:",
+   "sortOptions": ["Newest", "Oldest", "Most Viewed", "Most Popular"],
+    "readMore": "Read Article",
+    "items": [
+      { "title": "Default title text default title", "text": "Default subtitle default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title (hover)", "text": "Default subtitle default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title", "text": "Default subtitle default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title", "text": "Default subtitle default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title", "text": "Default subtitle default subtitle", "author": "Author Name", "time": "7 hours ago" },
+      { "title": "Default title text default title", "text": "Default subtitle default subtitle", "author": "Author Name", "time": "7 hours ago" }
+    ]
   }
 
 }
