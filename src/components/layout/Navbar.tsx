@@ -13,9 +13,9 @@ const navLinks: NavLink[] = [
   {
     key: "services",
     href: "/services",
-    submenu: [
-      { key: "services", href: "/services" },
-      { key: "services", href: "/services" },
+     submenu: [
+      { key: "servicesSection", href: "/services#services-section" },
+      { key: "projectsSection", href: "/projects#projects-section" },
     ],
   },
   { key: "blog", href: "/blog" },
@@ -55,41 +55,44 @@ export default function Navbar({ overlay = false }: { overlay?: boolean }) {
        <div className="hidden md:flex items-start gap-20 pl-20">
   <ul className="flex items-center gap-8 text-base text-white/80">
             {navLinks.map((link) => (
-              <li
-                key={link.href}
-                className="relative"
-                onMouseEnter={() => link.submenu && setOpenSubmenu(link.href)}
-                onMouseLeave={() => link.submenu && setOpenSubmenu(null)}
-              >
-              <Link
-  href={link.href}
-  className={`flex items-center gap-1 whitespace-nowrap hover:text-white ${interactive}`}
+       <li
+  key={link.href}
+  className="relative"
+  onMouseEnter={() => link.submenu && setOpenSubmenu(link.href)}
+  onMouseLeave={() => link.submenu && setOpenSubmenu(null)}
 >
-                  {t(link.key)}
-                  {link.submenu && (
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform ${
-                        openSubmenu === link.href ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </Link>
-                {link.submenu && openSubmenu === link.href && (
-                  <ul className="absolute top-full right-0 mt-2 min-w-[160px] rounded-md bg-card border border-border-subtle py-2 shadow-lg">
-                    {link.submenu.map((sub, i) => (
-                      <li key={i}>
-                        <Link
-                          href={sub.href}
-                          className={`block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-card-light ${interactive}`}
-                        >
-                          {t(sub.key)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
+  <Link
+    href={link.href}
+    className={`flex items-center gap-1 hover:text-white ${interactive}`}
+  >
+    {t(link.key)}
+    {link.submenu && (
+      <ChevronDown
+        size={14}
+        className={`transition-transform ${
+          openSubmenu === link.href ? "rotate-180" : ""
+        }`}
+      />
+    )}
+  </Link>
+
+  {link.submenu && openSubmenu === link.href && (
+    <div className="absolute top-full right-0 pt-2 min-w-[180px]">
+      <ul className="rounded-md bg-card border border-border-subtle py-2 shadow-lg">
+        {link.submenu.map((sub, i) => (
+          <li key={i}>
+            <Link
+              href={sub.href}
+              className={`block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-card-light ${interactive}`}
+            >
+              {t(sub.key)}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</li>
             ))}
           </ul>
 

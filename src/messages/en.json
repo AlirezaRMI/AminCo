@@ -3,6 +3,8 @@
   "nav": {
     "home": "Home",
     "services": "Products & Services",
+     "servicesSection": "Services",
+    "projectsSection": "Projects",
     "blog": "News & Articles",
     "contact": "Contact Us"
   },
@@ -167,7 +169,7 @@
   },
 
     "servicesHero": {
-    "title": "Our Complete Range of Services!",
+    "title": "! Our Complete Range of Services",
     "subtitle": "Default text default text default text default text default text"
   },
 
@@ -178,6 +180,21 @@
       { "description": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." },
       { "description": "After-sales service is a key part of everything we offer. We're deeply aware of our customers' after-sales needs." }
     ]
+  },
+
+    "projectsHero": {
+    "title": "Completed Projects",
+    "subtitle": "Default text default text default text default text default text"
+  },
+
+    "servicesProjectsHero": {
+    "title": "Completed Projects",
+    "subtitle": "Default text default text default text default text default text"
+  },
+  "projectGallery": {
+    "title": "Marinator Project",
+    "subtitle": "Default text default text default text default text default text",
+    "itemTitle": "65L Vacuum-Sealed Marinator Producer"
   }
 
 }
