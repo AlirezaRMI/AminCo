@@ -2,7 +2,6 @@ using Application;
 using Data;
 using Data.Context;
 using Data.Seed;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,10 +12,23 @@ using Web.Securities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+// ====== Services ======
 builder.Services.AddDataServices(builder.Configuration);
 builder.Services.ApplicationServiceProvider(builder.Configuration);
 builder.Services.AddWebServices(builder.Configuration);
+builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
 // ====== OpenAPI ======
 builder.Services.AddOpenApi("v1", options =>
@@ -25,28 +37,18 @@ builder.Services.AddOpenApi("v1", options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 
-
+// ====== JWT Settings ======
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 if (jwtSettings == null || string.IsNullOrEmpty(jwtSettings.SecretKey))
     throw new Exception("JwtSettings not configured properly");
 
+// ====== Authentication ======
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddCookie(options =>
-{
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/Logout";
-    options.AccessDeniedPath = "/Home/AccessDenied";
-    options.Cookie.HttpOnly = true;
-    options.Cookie.SameSite = SameSiteMode.Lax;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-    options.ExpireTimeSpan = TimeSpan.FromDays(7);
-    options.SlidingExpiration = true;
-})
-.AddJwtBearer("Bearer", options =>
+.AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -68,11 +70,6 @@ builder.Services.AddAuthentication(options =>
             if (!string.IsNullOrEmpty(token))
                 context.Token = token;
             return Task.CompletedTask;
-        },
-        OnAuthenticationFailed = context =>
-        {
-            Console.WriteLine("JWT Authentication Failed: " + context.Exception.Message);
-            return Task.CompletedTask;
         }
     };
 });
@@ -82,34 +79,22 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // ====== Migration & Seeding ======
-if (app.Environment.IsProduction())
+using (var scope = app.Services.CreateScope())
 {
-    using (var scope = app.Services.CreateScope())
+    var dbContext = scope.ServiceProvider.GetRequiredService<AmincoDbContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    try
     {
-        var dbContext = scope.ServiceProvider.GetRequiredService<AmincoDbContext>();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-        try
-        {
-            dbContext.Database.Migrate();
-            LandingPageSeeder.Seed(scope.ServiceProvider);
-            logger.LogInformation("Database migrated and seeded successfully.");
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-        }
+        dbContext.Database.Migrate();
+        LandingPageSeeder.Seed(scope.ServiceProvider);
+        logger.LogInformation("Database migrated and seeded successfully.");
     }
-}
-else
-{
-    using (var scope = app.Services.CreateScope())
+    catch (Exception ex)
     {
-        var dbContext = scope.ServiceProvider.GetRequiredService<AmincoDbContext>();
-        dbContext.Database.EnsureCreated();
+        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
     }
 }
 
-// ====== Middleware ======
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -118,18 +103,24 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+
+app.UseCors("AllowReactApp");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ====== Routing ======
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
 
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+if (app.Environment.IsDevelopment())
+{
+    app.MapReverseProxy();
+}
+else
+{
+    app.MapFallbackToFile("index.html");
+}
 
 // ====== OpenAPI & Scalar ======
 app.MapOpenApi();

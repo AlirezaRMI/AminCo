@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Users;
 using Application.Logics.Intefaces;
+using Domain.Common;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,10 @@ namespace Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IUserService userService, IRoleService roleService, IJwtService jwtService)
+    public class AuthController(
+        IUserService userService,
+        IRoleService roleService,
+        IJwtService jwtService)
         : ControllerBase
     {
         [HttpPost("register")]
@@ -20,7 +24,8 @@ namespace Web.Controllers.Api
             var customerRole = await roleService.GetByNameAsync("Customer");
             if (customerRole != null)
                 await roleService.AssignRoleToUserAsync(user.Id, customerRole.Id);
-            return user;
+
+            return new ApiResult<UserDto>(true, ApiResultStatusCode.Success, user);
         }
 
         [HttpPost("login")]
@@ -34,22 +39,25 @@ namespace Web.Controllers.Api
             var roles = await roleService.GetUserRolesAsync(user.Id);
             var token = jwtService.GenerateToken(user, roles);
 
+            // تنظیم کوکی با Secure = false در محیط توسعه (HTTP)
+            var isSecure = Request.IsHttps; // در production با HTTPS true است
             HttpContext.Response.Cookies.Append("accessToken", token, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
+                Secure = isSecure,          // ← این خط اصلاح شد
+                SameSite = SameSiteMode.Lax, // ← بهتر از Strict برای کاربری راحت‌تر
                 Expires = DateTimeOffset.UtcNow.AddMinutes(120)
             });
 
-            return new LoginResponseDto(token, user);
+            var response = new LoginResponseDto(token, user);
+            return new ApiResult<LoginResponseDto>(true, ApiResultStatusCode.Success, response);
         }
 
         [HttpPost("logout")]
         public IActionResult Logout()
         {
             HttpContext.Response.Cookies.Delete("accessToken");
-            return Ok();
+            return Ok(new { success = true, message = "خروج با موفقیت انجام شد." });
         }
 
         [Authorize]
@@ -58,7 +66,7 @@ namespace Web.Controllers.Api
         {
             var userId = User.GetUserId();
             var user = await userService.GetByIdAsync(userId);
-            return user;
+            return new ApiResult<UserDto>(true, ApiResultStatusCode.Success, user);
         }
     }
 
