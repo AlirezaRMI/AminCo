@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Users;
 using Application.Logics.Intefaces;
+using Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Filters;
@@ -14,7 +15,8 @@ namespace Web.Controllers.Api
         [HttpGet]
         public async Task<ApiResult<IReadOnlyList<UserDto>>> GetAll()
         {
-            throw new NotImplementedException();
+            var users = await userService.GetAllAsync();
+            return new ApiResult<IReadOnlyList<UserDto>>(true, ApiResultStatusCode.Success, users);
         }
 
         [HttpGet("{id}")]
