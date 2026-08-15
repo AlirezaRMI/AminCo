@@ -13,10 +13,10 @@ import project4 from "@/../public/images/project4.png";
 import project5 from "@/../public/images/project5.png";
 import viewAllPatternUp from "@/../public/images/viewAllPatternUp.png";
 import { interactive } from "@/lib/utils";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
-interface ProjectItem {
-  title: string;
-}
+
 
 const images = [project1, project2, project3, project4, project5];
 
@@ -24,11 +24,15 @@ export default function Projects() {
   const t = useTranslations("projects");
   const items = t.raw("items") as ProjectItem[];
 
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.4 });
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     direction: "rtl",
     align: "center",
     containScroll: false,
+    watchDrag: true,
   });
 
   const [selectedIndex, setSelectedIndex] = useState(2);
@@ -44,11 +48,30 @@ export default function Projects() {
     onSelect();
   }, [emblaApi, onSelect]);
 
+  // چرخش خودکار - فقط وقتی این بخش وارد دید (اسکرول) شد
+  useEffect(() => {
+    if (!emblaApi || !isInView) return;
+
+    const targetIndex = items.length - 2;
+    let hasStopped = false;
+
+    const interval = setInterval(() => {
+      if (hasStopped) return;
+      emblaApi.scrollNext();
+      if (emblaApi.selectedScrollSnap() === targetIndex) {
+        hasStopped = true;
+        clearInterval(interval);
+      }
+    }, 600);
+
+    return () => clearInterval(interval);
+  }, [emblaApi, isInView, items.length]);
+
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <section className="w-full px-4 md:px-10 py-4">
+      <section ref={sectionRef} className="w-full px-4 md:px-10 py-4">
       <div className="relative rounded-3xl bg-card overflow-hidden px-5 md:px-12 py-10 md:py-14">
         {/* پترن دکوری بالا-چپ */}
         <svg

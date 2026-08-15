@@ -94,7 +94,7 @@ export default function BottomCards() {
           </div>
 
           <Link
-            href="/services/package"
+            href="/services"
             className={`relative w-[20%] h-full flex flex-col items-start justify-center gap-4 pl-2 pr-1 ${interactive}`}
           >
             <span

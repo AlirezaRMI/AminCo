@@ -12,7 +12,7 @@ export default function Footer() {
     home: "/",
     services: "/services",
     blog: "/blog",
-    contact: "/contact",
+    contact: "/about",
   };
 
   return (

@@ -63,7 +63,7 @@ export default function ConsultBanner() {
           className="absolute bottom-6 -left-4 md:-left-6 z-20"
         >
           <Link
-            href="/contact"
+            href="/about"
             onMouseDown={() => setIsPressed(true)}
             onMouseUp={() => setIsPressed(false)}
             onMouseLeave={() => setIsPressed(false)}

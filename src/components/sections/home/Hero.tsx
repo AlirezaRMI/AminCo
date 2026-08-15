@@ -11,6 +11,8 @@ import productCard2 from "@/../public/images/productCard2.png";
 import { interactive } from "@/lib/utils";
 import { ArrowUpLeft } from "lucide-react";
 import { useLocale } from "next-intl";
+import CountUpNumber from "@/components/ui/CountUpNumber";
+import { motion } from "framer-motion";
 
 interface StatItem {
   value: string;
@@ -33,7 +35,12 @@ const displayStats: StatItem[] = isRtl ? stats : [...stats].reverse();
     <section className="w-full px-4 md:px-10 pt-4">
       <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-6">
         {/* ستون عکس - Navbar overlay دقیقاً داخل همین کانتینر */}
-        <div className="animate-slide-in-right relative h-[560px] lg:h-[640px] w-full md:w-[78%] lg:w-[75%] rounded-2xl lg:rounded-3xl overflow-hidden shrink-0">
+        <motion.div
+  initial={{ opacity: 0, x: 40, scale: 1.05 }}
+  animate={{ opacity: 1, x: 0, scale: 1 }}
+  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+  className="relative h-[560px] lg:h-[640px] w-full lg:w-[75%] rounded-2xl lg:rounded-3xl overflow-hidden shrink-0"
+>
           <Image
             src={heroKitchen}
             alt="آشپزخانه صنعتی"
@@ -74,33 +81,35 @@ const displayStats: StatItem[] = isRtl ? stats : [...stats].reverse();
     isRtl ? "mr-auto" : "ml-auto"
   }`}
 >
-  {displayStats.map((stat: StatItem, i: number) => (
-    <div
-      key={i}
-      className={`text-center flex-1 ${
-        i > 0 ? "border-r border-white/30 pr-6 md:pr-10" : ""
-      }`}
-    >
-      <p className="text-xl md:text-2xl font-bold text-white">{stat.value}</p>
-      <p className="text-xs text-white/50 mt-1">{stat.label}</p>
-    </div>
-  ))}
+{stats.map((stat: StatItem, i: number) => (
+  <div
+    key={i}
+    className={`text-center flex-1 ${
+      i > 0 ? "border-r border-white/30 pr-6 md:pr-10" : ""
+    }`}
+  >
+    <p className="text-xl md:text-2xl font-bold text-white">
+      <CountUpNumber value={stat.value} duration={1.8} />
+    </p>
+    <p className="text-xs text-white/50 mt-1">{stat.label}</p>
+  </div>
+))}
 </div>
 </div>
-        </div>
+</motion.div>
 
 {/* دسکتاپ بزرگ - فقط از lg به بالا نمایش داده بشه (نه md) */}
 <div className="animate-slide-in-left-delay-1 hidden lg:flex lg:flex-col gap-3 w-full lg:w-[20%] h-[560px] lg:mt-24">
   <ProductCard
     image={productCard1}
-    href="/services/1"
+    href="/services"
     title={t("productCards.card1.title")}
     subtitle={t("productCards.card1.subtitle")}
     bgColor="#7A1F35"
   />
  <ProductCard
   image={productCard2}
-  href="/services/2"
+  href="/services"
   title={t("productCards.card2.title")}
   subtitle={t("productCards.card2.subtitle")}
   hasOwnBackground
@@ -111,16 +120,16 @@ const displayStats: StatItem[] = isRtl ? stats : [...stats].reverse();
 
 {/* موبایل + تبلت - افقی، تا قبل از lg */}
 <div className="flex lg:hidden flex-row gap-4 w-full">
-  <ProductCard
-    image={productCard1}
-    href="/services/1"
-    title={t("productCards.card1.title")}
-    subtitle={t("productCards.card1.subtitle")}
-    bgColor="#7A1F35"
-  />
+<ProductCard
+  image={productCard1}
+  href="/services"
+  title={t("productCards.card1.title")}
+  subtitle={t("productCards.card1.subtitle")}
+  bgColor="#7A1F35"
+/>
 <ProductCard
   image={productCard2}
-  href="/services/2"
+  href="/services"
   title={t("productCards.card2.title")}
   subtitle={t("productCards.card2.subtitle")}
   hasOwnBackground
@@ -155,16 +164,25 @@ function ProductCard({
   return (
     <Link
       href={href}
-      className={`relative w-full h-32 md:h-auto md:flex-1 rounded-xl md:rounded-2xl overflow-hidden flex items-end p-4 ${interactive}`}
+      className={`group relative w-full h-32 md:h-auto md:flex-1 rounded-xl md:rounded-2xl overflow-hidden flex items-end p-4 ${interactive}`}
       style={!hasOwnBackground ? { backgroundColor: bgColor } : undefined}
     >
       <div className={hasOwnBackground ? "absolute inset-0" : "absolute inset-0 flex items-center justify-center p-4"}>
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className={hasOwnBackground ? "object-cover" : "object-contain"}
-        />
+        <motion.div
+          initial={{ scale: 1.25, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className={`transition-transform duration-700 group-hover:scale-110 ${
+              hasOwnBackground ? "object-cover" : "object-contain"
+            }`}
+          />
+        </motion.div>
       </div>
 
       {hasOwnBackground && (
@@ -177,7 +195,7 @@ function ProductCard({
           <p className="text-sm md:text-base font-bold text-white">{subtitle}</p>
         </div>
         <span
-          className="flex items-center justify-center w-8 h-8 rounded-full shrink-0"
+          className="flex items-center justify-center w-8 h-8 rounded-full shrink-0 transition-transform duration-300 group-hover:scale-110"
           style={{ background: iconBg }}
         >
           <ArrowUpLeft size={14} className={iconColor} />

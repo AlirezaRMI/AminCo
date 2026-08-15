@@ -7,6 +7,8 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { NavLink } from "@/types/content";
 import { interactive } from "@/lib/utils";
+import { motion } from "framer-motion";
+
 
 const navLinks: NavLink[] = [
   { key: "home", href: "/" },
@@ -29,10 +31,13 @@ export default function Navbar({ overlay = false }: { overlay?: boolean }) {
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
 
   return (
-    <header
-      style={overlay ? { position: "absolute", top: 0, left: 0, right: 0, zIndex: 50 } : undefined}
-      className={`w-full ${overlay ? "bg-transparent" : "relative bg-background z-50"}`}
-    >
+  <motion.header
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+  style={overlay ? { position: "absolute", top: 0, left: 0, right: 0, zIndex: 50 } : undefined}
+  className={`w-full ${overlay ? "bg-transparent" : "relative bg-background z-50"}`}
+>
       <nav className="flex items-center justify-end pt-6 md:pt-8 pb-4 pr-2 md:pr-3 pl-0 w-full">
         {/* موبایل */}
         <div className="flex md:hidden items-center justify-between w-full">
@@ -52,57 +57,57 @@ export default function Navbar({ overlay = false }: { overlay?: boolean }) {
         </div>
 
         {/* دسکتاپ */}
-       <div className="hidden md:flex items-start gap-20 pl-20">
-  <ul className="flex items-center gap-8 text-base text-white/80">
-            {navLinks.map((link) => (
-       <li
-  key={link.href}
-  className="relative"
-  onMouseEnter={() => link.submenu && setOpenSubmenu(link.href)}
-  onMouseLeave={() => link.submenu && setOpenSubmenu(null)}
->
-  <Link
-    href={link.href}
-    className={`flex items-center gap-1 hover:text-white ${interactive}`}
-  >
-    {t(link.key)}
-    {link.submenu && (
-      <ChevronDown
-        size={14}
-        className={`transition-transform ${
-          openSubmenu === link.href ? "rotate-180" : ""
-        }`}
-      />
-    )}
-  </Link>
+<div className="hidden md:flex items-center gap-4 lg:gap-8 pl-8 lg:pl-20 flex-nowrap">
+  <ul className="flex items-center gap-4 lg:gap-8 text-sm lg:text-base text-white/80 flex-nowrap whitespace-nowrap">
+    {navLinks.map((link) => (
+      <li
+        key={link.href}
+        className="relative shrink-0"
+        onMouseEnter={() => link.submenu && setOpenSubmenu(link.href)}
+        onMouseLeave={() => link.submenu && setOpenSubmenu(null)}
+      >
+        <Link
+          href={link.href}
+          className={`flex items-center gap-1 hover:text-white whitespace-nowrap ${interactive}`}
+        >
+          {t(link.key)}
+          {link.submenu && (
+            <ChevronDown
+              size={14}
+              className={`transition-transform ${
+                openSubmenu === link.href ? "rotate-180" : ""
+              }`}
+            />
+          )}
+        </Link>
 
-  {link.submenu && openSubmenu === link.href && (
-    <div className="absolute top-full right-0 pt-2 min-w-[180px]">
-      <ul className="rounded-md bg-card border border-border-subtle py-2 shadow-lg">
-        {link.submenu.map((sub, i) => (
-          <li key={i}>
-            <Link
-              href={sub.href}
-              className={`block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-card-light ${interactive}`}
-            >
-              {t(sub.key)}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )}
-</li>
-            ))}
-          </ul>
+        {link.submenu && openSubmenu === link.href && (
+          <div className="absolute top-full right-0 pt-2 min-w-[180px]">
+            <ul className="rounded-md bg-card border border-border-subtle py-2 shadow-lg">
+              {link.submenu.map((sub, i) => (
+                <li key={i}>
+                  <Link
+                    href={sub.href}
+                    className={`block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-card-light whitespace-nowrap ${interactive}`}
+                  >
+                    {t(sub.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
 
-          <div className="flex flex-col items-center gap-2">
-    <Link href="/" className={`text-xl font-bold tracking-wide text-white ${interactive}`}>
+  <div className="flex flex-col items-center gap-2 shrink-0">
+    <Link href="/" className={`text-lg lg:text-xl font-bold tracking-wide text-white whitespace-nowrap ${interactive}`}>
       AMIN.CO
     </Link>
     <LanguageSwitcher />
-          </div>
-        </div>
+  </div>
+</div>
       </nav>
 
       {/* منوی موبایل باز شونده */}
@@ -155,6 +160,6 @@ export default function Navbar({ overlay = false }: { overlay?: boolean }) {
           ))}
         </ul>
       )}
-    </header>
+   </motion.header>
   );
 }
